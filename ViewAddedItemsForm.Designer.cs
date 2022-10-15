@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewAddedItemsForm));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -42,16 +41,13 @@
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.offeringCardLarge4 = new ProjectBlue.OfferingCardLarge();
-            this.offeringCardLarge1 = new ProjectBlue.OfferingCardLarge();
-            this.offeringCardLarge2 = new ProjectBlue.OfferingCardLarge();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.materialTextBox5 = new MaterialSkin.Controls.MaterialTextBox();
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTextBox4 = new MaterialSkin.Controls.MaterialTextBox();
-            this.materialTextBox3 = new MaterialSkin.Controls.MaterialTextBox();
+            this.materialTextBox5 = new MaterialSkin.Controls.MaterialTextBox();
             this.materialTextBox2 = new MaterialSkin.Controls.MaterialTextBox();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialTextBox3 = new MaterialSkin.Controls.MaterialTextBox();
             this.materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -71,7 +67,6 @@
             this.materialCard1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -119,14 +114,13 @@
             this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(130, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(57, 19);
             this.materialLabel1.TabIndex = 9;
-            this.materialLabel1.Text = "+251 91 030 5070";
+            this.materialLabel1.Text = "--------------";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Silver;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(7, 6);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
@@ -145,9 +139,9 @@
             this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(72, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(65, 19);
             this.materialLabel2.TabIndex = 8;
-            this.materialLabel2.Text = "Bole Atlas";
+            this.materialLabel2.Text = "----------------";
             // 
             // materialLabel3
             // 
@@ -159,9 +153,9 @@
             this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(110, 24);
+            this.materialLabel3.Size = new System.Drawing.Size(120, 24);
             this.materialLabel3.TabIndex = 7;
-            this.materialLabel3.Text = "Atmosphere";
+            this.materialLabel3.Text = "-----------------";
             // 
             // materialTextBox6
             // 
@@ -171,7 +165,7 @@
             this.materialTextBox6.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox6.Hint = "Location on Map";
             this.materialTextBox6.LeadingIcon = null;
-            this.materialTextBox6.Location = new System.Drawing.Point(75, 169);
+            this.materialTextBox6.Location = new System.Drawing.Point(75, 165);
             this.materialTextBox6.MaxLength = 19;
             this.materialTextBox6.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox6.Multiline = false;
@@ -240,9 +234,6 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.AutoScroll = true;
-            this.flowLayoutPanel2.Controls.Add(this.offeringCardLarge4);
-            this.flowLayoutPanel2.Controls.Add(this.offeringCardLarge1);
-            this.flowLayoutPanel2.Controls.Add(this.offeringCardLarge2);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(32, 368);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
@@ -250,56 +241,17 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(759, 431);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
-            // offeringCardLarge4
-            // 
-            this.offeringCardLarge4.Location = new System.Drawing.Point(4, 4);
-            this.offeringCardLarge4.Margin = new System.Windows.Forms.Padding(4, 4, 20, 4);
-            this.offeringCardLarge4.MaximumSize = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge4.MinimumSize = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge4.Name = "offeringCardLarge4";
-            this.offeringCardLarge4.OfferingImage = ((System.Drawing.Image)(resources.GetObject("offeringCardLarge4.OfferingImage")));
-            this.offeringCardLarge4.OfferingName = "Lasagna";
-            this.offeringCardLarge4.RestaurantName = "Trattoria Gusto";
-            this.offeringCardLarge4.Size = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge4.TabIndex = 13;
-            // 
-            // offeringCardLarge1
-            // 
-            this.offeringCardLarge1.Location = new System.Drawing.Point(321, 4);
-            this.offeringCardLarge1.Margin = new System.Windows.Forms.Padding(4, 4, 20, 4);
-            this.offeringCardLarge1.MaximumSize = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge1.MinimumSize = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge1.Name = "offeringCardLarge1";
-            this.offeringCardLarge1.OfferingImage = ((System.Drawing.Image)(resources.GetObject("offeringCardLarge1.OfferingImage")));
-            this.offeringCardLarge1.OfferingName = "Magna";
-            this.offeringCardLarge1.RestaurantName = "Pastry";
-            this.offeringCardLarge1.Size = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge1.TabIndex = 14;
-            // 
-            // offeringCardLarge2
-            // 
-            this.offeringCardLarge2.Location = new System.Drawing.Point(638, 4);
-            this.offeringCardLarge2.Margin = new System.Windows.Forms.Padding(4, 4, 20, 4);
-            this.offeringCardLarge2.MaximumSize = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge2.MinimumSize = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge2.Name = "offeringCardLarge2";
-            this.offeringCardLarge2.OfferingImage = ((System.Drawing.Image)(resources.GetObject("offeringCardLarge2.OfferingImage")));
-            this.offeringCardLarge2.OfferingName = "Crispy Chicken";
-            this.offeringCardLarge2.RestaurantName = "Sapore Restaurant";
-            this.offeringCardLarge2.Size = new System.Drawing.Size(293, 400);
-            this.offeringCardLarge2.TabIndex = 15;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.pictureBox8);
+            this.panel2.Controls.Add(this.materialTextBox4);
             this.panel2.Controls.Add(this.materialTextBox5);
+            this.panel2.Controls.Add(this.materialTextBox2);
             this.panel2.Controls.Add(this.materialTextBox6);
             this.panel2.Controls.Add(this.materialLabel6);
-            this.panel2.Controls.Add(this.materialTextBox4);
             this.panel2.Controls.Add(this.materialTextBox3);
-            this.panel2.Controls.Add(this.materialTextBox2);
             this.panel2.Controls.Add(this.materialTextBox1);
             this.panel2.Controls.Add(this.pictureBox7);
             this.panel2.Controls.Add(this.pictureBox6);
@@ -331,6 +283,24 @@
             this.pictureBox8.TabIndex = 55;
             this.pictureBox8.TabStop = false;
             // 
+            // materialTextBox4
+            // 
+            this.materialTextBox4.AnimateReadOnly = false;
+            this.materialTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialTextBox4.Depth = 0;
+            this.materialTextBox4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox4.Hint = "Opening and Closing Hours";
+            this.materialTextBox4.LeadingIcon = null;
+            this.materialTextBox4.Location = new System.Drawing.Point(458, 165);
+            this.materialTextBox4.MaxLength = 19;
+            this.materialTextBox4.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox4.Multiline = false;
+            this.materialTextBox4.Name = "materialTextBox4";
+            this.materialTextBox4.Size = new System.Drawing.Size(255, 50);
+            this.materialTextBox4.TabIndex = 51;
+            this.materialTextBox4.Text = "";
+            this.materialTextBox4.TrailingIcon = null;
+            // 
             // materialTextBox5
             // 
             this.materialTextBox5.AnimateReadOnly = false;
@@ -349,56 +319,6 @@
             this.materialTextBox5.Text = "";
             this.materialTextBox5.TrailingIcon = null;
             // 
-            // materialLabel6
-            // 
-            this.materialLabel6.AutoSize = true;
-            this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(77, 180);
-            this.materialLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(67, 19);
-            this.materialLabel6.TabIndex = 55;
-            this.materialLabel6.Text = "Map Link";
-            this.materialLabel6.Click += new System.EventHandler(this.materialLabel6_Click);
-            // 
-            // materialTextBox4
-            // 
-            this.materialTextBox4.AnimateReadOnly = false;
-            this.materialTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialTextBox4.Depth = 0;
-            this.materialTextBox4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox4.Hint = "Opening and Closing Hours";
-            this.materialTextBox4.LeadingIcon = null;
-            this.materialTextBox4.Location = new System.Drawing.Point(454, 165);
-            this.materialTextBox4.MaxLength = 19;
-            this.materialTextBox4.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox4.Multiline = false;
-            this.materialTextBox4.Name = "materialTextBox4";
-            this.materialTextBox4.Size = new System.Drawing.Size(255, 50);
-            this.materialTextBox4.TabIndex = 51;
-            this.materialTextBox4.Text = "";
-            this.materialTextBox4.TrailingIcon = null;
-            // 
-            // materialTextBox3
-            // 
-            this.materialTextBox3.AnimateReadOnly = false;
-            this.materialTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialTextBox3.Depth = 0;
-            this.materialTextBox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox3.Hint = "Phone Number";
-            this.materialTextBox3.LeadingIcon = null;
-            this.materialTextBox3.Location = new System.Drawing.Point(458, 30);
-            this.materialTextBox3.MaxLength = 19;
-            this.materialTextBox3.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox3.Multiline = false;
-            this.materialTextBox3.Name = "materialTextBox3";
-            this.materialTextBox3.Size = new System.Drawing.Size(255, 50);
-            this.materialTextBox3.TabIndex = 52;
-            this.materialTextBox3.Text = "";
-            this.materialTextBox3.TrailingIcon = null;
-            // 
             // materialTextBox2
             // 
             this.materialTextBox2.AnimateReadOnly = false;
@@ -416,6 +336,38 @@
             this.materialTextBox2.TabIndex = 51;
             this.materialTextBox2.Text = "";
             this.materialTextBox2.TrailingIcon = null;
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.Location = new System.Drawing.Point(77, 180);
+            this.materialLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(89, 19);
+            this.materialLabel6.TabIndex = 55;
+            this.materialLabel6.Text = "----------------------";
+            this.materialLabel6.Click += new System.EventHandler(this.materialLabel6_Click);
+            // 
+            // materialTextBox3
+            // 
+            this.materialTextBox3.AnimateReadOnly = false;
+            this.materialTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialTextBox3.Depth = 0;
+            this.materialTextBox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox3.Hint = "Phone Number";
+            this.materialTextBox3.LeadingIcon = null;
+            this.materialTextBox3.Location = new System.Drawing.Point(454, 30);
+            this.materialTextBox3.MaxLength = 19;
+            this.materialTextBox3.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox3.Multiline = false;
+            this.materialTextBox3.Name = "materialTextBox3";
+            this.materialTextBox3.Size = new System.Drawing.Size(255, 50);
+            this.materialTextBox3.TabIndex = 52;
+            this.materialTextBox3.Text = "";
+            this.materialTextBox3.TrailingIcon = null;
             // 
             // materialTextBox1
             // 
@@ -523,9 +475,9 @@
             this.materialLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel20.Name = "materialLabel20";
-            this.materialLabel20.Size = new System.Drawing.Size(131, 19);
+            this.materialLabel20.Size = new System.Drawing.Size(85, 19);
             this.materialLabel20.TabIndex = 4;
-            this.materialLabel20.Text = "8:00 AM - 9:00 PM";
+            this.materialLabel20.Text = "---------------------";
             // 
             // materialLabel21
             // 
@@ -536,9 +488,9 @@
             this.materialLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(193, 19);
+            this.materialLabel21.Size = new System.Drawing.Size(77, 19);
             this.materialLabel21.TabIndex = 3;
-            this.materialLabel21.Text = "Dine-in, Takeaway, Delivery";
+            this.materialLabel21.Text = "-------------------";
             // 
             // materialLabel18
             // 
@@ -549,9 +501,9 @@
             this.materialLabel18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel18.Name = "materialLabel18";
-            this.materialLabel18.Size = new System.Drawing.Size(130, 19);
+            this.materialLabel18.Size = new System.Drawing.Size(77, 19);
             this.materialLabel18.TabIndex = 2;
-            this.materialLabel18.Text = "+251 91 030 5070";
+            this.materialLabel18.Text = "-------------------";
             // 
             // materialLabel17
             // 
@@ -562,9 +514,9 @@
             this.materialLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel17.Name = "materialLabel17";
-            this.materialLabel17.Size = new System.Drawing.Size(72, 19);
+            this.materialLabel17.Size = new System.Drawing.Size(81, 19);
             this.materialLabel17.TabIndex = 1;
-            this.materialLabel17.Text = "Bole Atlas";
+            this.materialLabel17.Text = "--------------------";
             // 
             // materialLabel16
             // 
@@ -576,9 +528,9 @@
             this.materialLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel16.Name = "materialLabel16";
-            this.materialLabel16.Size = new System.Drawing.Size(167, 19);
+            this.materialLabel16.Size = new System.Drawing.Size(69, 19);
             this.materialLabel16.TabIndex = 0;
-            this.materialLabel16.Text = "Atmosphere Restaurant";
+            this.materialLabel16.Text = "-----------------";
             // 
             // label1
             // 
@@ -620,7 +572,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -641,9 +592,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private OfferingCardLarge offeringCardLarge4;
-        private OfferingCardLarge offeringCardLarge1;
-        private OfferingCardLarge offeringCardLarge2;
         private System.Windows.Forms.Panel panel2;
         private MaterialSkin.Controls.MaterialDivider materialDivider4;
         private MaterialSkin.Controls.MaterialLabel materialLabel20;

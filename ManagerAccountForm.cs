@@ -15,10 +15,12 @@ namespace ProjectBlue
     public partial class ManagerAccountForm : Form
     {
         string fullname;
-        public ManagerAccountForm(string fullname)
+        ManagerMainForm mmf;
+        public ManagerAccountForm(string fullname, ManagerMainForm mmf)
         {
             InitializeComponent();
             this.fullname = fullname;
+            this.mmf = mmf;
         }
 
         private void ManagerAccountForm_Load(object sender, EventArgs e)
@@ -69,7 +71,7 @@ namespace ProjectBlue
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            mmf.Close();
             LoginForm login = new LoginForm();
             login.Show();
         }

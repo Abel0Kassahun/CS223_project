@@ -75,7 +75,7 @@
             this.lblEmailAddress.Depth = 0;
             this.lblEmailAddress.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblEmailAddress.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblEmailAddress.Location = new System.Drawing.Point(432, 356);
+            this.lblEmailAddress.Location = new System.Drawing.Point(384, 356);
             this.lblEmailAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmailAddress.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblEmailAddress.Name = "lblEmailAddress";
@@ -102,7 +102,7 @@
             this.materialDivider3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider3.Depth = 0;
             this.materialDivider3.Location = new System.Drawing.Point(56, 310);
-            this.materialDivider3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.materialDivider3.Margin = new System.Windows.Forms.Padding(4);
             this.materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider3.Name = "materialDivider3";
             this.materialDivider3.Size = new System.Drawing.Size(560, 2);
@@ -115,13 +115,13 @@
             this.lblPhoneNumber.Depth = 0;
             this.lblPhoneNumber.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblPhoneNumber.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblPhoneNumber.Location = new System.Drawing.Point(432, 249);
+            this.lblPhoneNumber.Location = new System.Drawing.Point(384, 249);
             this.lblPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPhoneNumber.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPhoneNumber.Name = "lblPhoneNumber";
-            this.lblPhoneNumber.Size = new System.Drawing.Size(130, 19);
+            this.lblPhoneNumber.Size = new System.Drawing.Size(53, 19);
             this.lblPhoneNumber.TabIndex = 7;
-            this.lblPhoneNumber.Text = "+251 98 765 4321";
+            this.lblPhoneNumber.Text = " ------------";
             // 
             // lblUsername
             // 
@@ -129,7 +129,7 @@
             this.lblUsername.Depth = 0;
             this.lblUsername.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblUsername.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblUsername.Location = new System.Drawing.Point(432, 139);
+            this.lblUsername.Location = new System.Drawing.Point(384, 139);
             this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUsername.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUsername.Name = "lblUsername";
@@ -143,7 +143,7 @@
             this.lblFullName.Depth = 0;
             this.lblFullName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblFullName.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblFullName.Location = new System.Drawing.Point(432, 39);
+            this.lblFullName.Location = new System.Drawing.Point(384, 34);
             this.lblFullName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFullName.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblFullName.Name = "lblFullName";
@@ -198,7 +198,7 @@
             this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider2.Depth = 0;
             this.materialDivider2.Location = new System.Drawing.Point(56, 203);
-            this.materialDivider2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.materialDivider2.Margin = new System.Windows.Forms.Padding(4);
             this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider2.Name = "materialDivider2";
             this.materialDivider2.Size = new System.Drawing.Size(560, 2);
@@ -210,7 +210,7 @@
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider1.Depth = 0;
             this.materialDivider1.Location = new System.Drawing.Point(56, 96);
-            this.materialDivider1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.materialDivider1.Margin = new System.Windows.Forms.Padding(4);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
             this.materialDivider1.Size = new System.Drawing.Size(560, 2);
@@ -231,7 +231,7 @@
             // btnLogOut
             // 
             this.btnLogOut.Location = new System.Drawing.Point(606, 589);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
             this.btnLogOut.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
@@ -291,7 +291,7 @@
             this.Controls.Add(this.materialCard4);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ManagerAccountForm";
             this.Text = "ManagerAccountForm";
             this.Load += new System.EventHandler(this.ManagerAccountForm_Load);

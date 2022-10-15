@@ -22,11 +22,13 @@ namespace ProjectBlue
     public partial class AddRestaurantForm : KryptonForm
     {
         string filename;
+        string fullname;
         byte[] image;
-        public AddRestaurantForm()
+        int rid;
+        public AddRestaurantForm(string fullname)
         {
             InitializeComponent();
-
+            this.fullname = fullname;
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue700, TextShade.WHITE);
         }
@@ -77,10 +79,9 @@ namespace ProjectBlue
             }
             else
             {
-                Regex[] reg = new Regex[3];
+                Regex[] reg = new Regex[2];
                 reg[0] = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");//for restaurant name 
                 reg[1] = new Regex("[0]{1}[9]{1}[0-9]{8}");//for phone number
-                reg[2] = new Regex(@"[A-Z]{1}+$");//for address
 
 
                 if (!(reg[0].IsMatch(txtRestaurantName.Text)))
@@ -90,10 +91,6 @@ namespace ProjectBlue
                 else if (!(reg[1].IsMatch(txtPhoneNumber.Text)))
                 {
                     errorProvider1.SetError(txtPhoneNumber, "Invalid phone number format!,\n Correct phone number example: \"0921314151\"");
-                }
-                else if (!(reg[2].IsMatch(txtAddress.Text)))
-                {
-                    errorProvider1.SetError(txtAddress, "First letter should be an alphabet");
                 }
                 else
                 {
@@ -130,7 +127,17 @@ namespace ProjectBlue
                                         cool = false;
                                     }
                                 }
-                            }
+                                if (cool)
+                                {
+                                    while (reader.Read())
+                                    {
+                                        if(txtRestaurantName.Text == reader.GetString("restaurant_name"))
+                                        {
+                                            rid = reader.GetInt32("restaurant_id");
+                                        }
+                                    }
+                                }
+                            }                            
                         }
                     }
                     if (cool)
@@ -145,8 +152,20 @@ namespace ProjectBlue
                         res.WorkingHours = txtOpeningTime.Text + " - " + txtClosingTime.Text;
                         res.Address_OnMap = txtAddressOnMap.Text;
                         res.save();
+                        string path = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        using (MySqlConnection conn = new MySqlConnection(path))
+                        {
+                            if (conn.State == ConnectionState.Closed)
+                                conn.Open();
+                            string query = "insert into restaurant_manager values(@full_name, @rid)";
+                            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@rid", rid);
+                                cmd.Parameters.AddWithValue("@full_name", fullname);
+                            }
+                        }
+                        this.Close();
                     }
-
                 }
             }
         }

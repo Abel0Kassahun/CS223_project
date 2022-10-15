@@ -52,13 +52,13 @@ namespace ProjectBlue
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SidePanelIndicator.Top = btnAdd.Top;
-            LoadForm(new AddItemsForm());
+            LoadForm(new AddItemsForm(fullname));
         }
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
             SidePanelIndicator.Top = btnAccount.Top;
-            LoadForm(new ManagerAccountForm(fullname));
+            LoadForm(new ManagerAccountForm(fullname, this));
         }
     }
 }

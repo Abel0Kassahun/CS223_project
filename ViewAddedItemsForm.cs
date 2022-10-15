@@ -38,6 +38,7 @@ namespace ProjectBlue
             materialTextBox3.Hide();
             materialTextBox5.Hide();
             materialTextBox4.Hide();
+            materialTextBox6.Hide();
 
             materialLabel4.Hide();
             materialLabel5.Hide();
@@ -55,7 +56,7 @@ namespace ProjectBlue
             {
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
-                string query1 = " select * from restaurant, retaurant_manager";
+                string query1 = " select * from restaurant, restaurant_manager";
                 string query2 = "select * from offerings";
                 using (MySqlCommand com = new MySqlCommand(query1, conn))
                 {
@@ -79,7 +80,7 @@ namespace ProjectBlue
                                     pictureBox1.Image = ConvertByteArrToImage((byte[])reader[4]);
                                     materialLabel3.Text = reader.GetString("restaurant_name");
                                     materialLabel2.Text = reader.GetString("address");
-                                    materialLabel1.Text = reader.GetString("phoneNumber");
+                                    materialLabel1.Text = reader.GetString("phone_number");
                                 }
                             }
                         }
@@ -141,7 +142,6 @@ namespace ProjectBlue
             materialTextBox3.Text = materialLabel18.Text;
             materialTextBox5.Text = materialLabel21.Text;
             materialTextBox4.Text = materialLabel20.Text;
-
         }
 
         private void materialLabel4_Click(object sender, EventArgs e)//this method is for when the "Save" label is clicked
@@ -167,7 +167,7 @@ namespace ProjectBlue
                 Regex[] reg = new Regex[3];
                 reg[0] = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");//for restaurant name 
                 reg[1] = new Regex("[0]{1}[9]{1}[0-9]{8}");//for phone number
-                reg[2] = new Regex(@"[A-Z]{1}+$");//for address
+                reg[2] = new Regex(@"[A-Z]{1}$");//for address
 
 
                 if (!(reg[0].IsMatch(materialTextBox1.Text)))
@@ -239,7 +239,24 @@ namespace ProjectBlue
                     }
 
                 }
-            }       
+                materialTextBox1.Hide();
+                materialTextBox2.Hide();
+                materialTextBox3.Hide();
+                materialTextBox5.Hide();
+                materialTextBox4.Hide();
+                materialTextBox6.Hide();
+
+                materialLabel16.Show();
+                materialLabel17.Show();
+                materialLabel18.Show();
+                materialLabel21.Show();
+                materialLabel20.Show();
+                materialLabel6.Show();
+
+                materialLabel4.Hide();
+                materialLabel5.Hide();
+                pictureBox7.Show();
+            }
         }
 
         private void materialLabel5_Click_1(object sender, EventArgs e)
@@ -260,7 +277,7 @@ namespace ProjectBlue
 
             materialLabel4.Hide();
             materialLabel5.Hide();
-            pictureBox7.Hide();
+            pictureBox7.Show();
         }
         private void materialLabel6_Click(object sender, EventArgs e)//when the "Map link" label is clicked
         {

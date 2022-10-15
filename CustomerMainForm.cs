@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
@@ -18,6 +19,8 @@ namespace ProjectBlue
     public partial class CustomerMainForm : MaterialForm
     {
         string fullname;
+        bool cool = false;
+        string offering_name;
         public CustomerMainForm(string full_name)
         {
             InitializeComponent();
@@ -26,6 +29,16 @@ namespace ProjectBlue
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue700, TextShade.WHITE);
+            materialLabel9.Hide();
+            /*
+            flpAppetizers.Controls.Clear();
+            flpChineseCuisine.Controls.Clear();
+            flpAmericanCuisine.Controls.Clear();
+            flpEthiopianCuisine.Controls.Clear();
+            flpMealOfTheDay.Controls.Clear();
+            flpEntrees.Controls.Clear();
+            flpDesserts.Controls.Clear();
+            */
         }
         private void CustomerMainForm_Load(object sender, EventArgs e)
         {
@@ -90,7 +103,7 @@ namespace ProjectBlue
                             if (reader.GetString("course_of_meal") == "Entree")
                             {
                                 OfferingCardMedium medium_card4 = new OfferingCardMedium();
-                                LoadMediumCard(reader, medium_card4);
+                                LoadMediumCard(reader, medium_card4);                          
                                 flpEntrees.Controls.Add(medium_card4);
                             }
                             if (reader.GetString("course_of_meal") == "Dessert")
@@ -197,77 +210,149 @@ namespace ProjectBlue
             LoginForm login = new LoginForm();
             login.Show();
         }
+
+        private void materialTextBox21_KeyDown(object sender, KeyEventArgs e)
+        {
+            flpSearchResults.Controls.Clear();
+            if (e.KeyCode == Keys.Enter)
+            {
+                errorProvider1.Clear();
+                if (string.IsNullOrEmpty(materialTextBox21.Text))
+                {
+                    MessageBox.Show("You haven't Entered an Offering Name to be Searched, Try Again", "Error");
+                }
+                else
+                {
+                    Regex reg = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");
+                    if (!(reg.IsMatch(materialTextBox21.Text)))
+                    {
+                        errorProvider1.SetError(materialTextBox21, "Incorrect Offering Name format!,\n Correct full name example: \"Happy Meal\"");
+                    }
+                    else
+                    {
+                        var item = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+                        string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        using (MySqlConnection conn = new MySqlConnection(connString))
+                        {
+                            if (conn.State == ConnectionState.Closed)
+                                conn.Open();
+                            string query = "select * from offerings";
+                            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                            {
+                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        if(materialTextBox21.Text == reader.GetString("offering_name"))
+                                        {
+                                            OfferingCardSmall ofcs = new OfferingCardSmall();
+                                            ofcs.OfferingName = reader.GetString("offering_name");
+                                            offering_name = reader.GetString("offering_name");
+                                            ofcs.OfferingPrice = reader.GetInt32("price");
+                                            ofcs.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+                                            flpSearchResults.Controls.Add(ofcs);
+                                            ofcs.Click += new EventHandler(offeringCardSmall_Click);
+                                        }
+                                        if (item.Text == reader.GetString("offering_type"))
+                                        {
+                                            if(offering_name != reader.GetString("offering_name"))
+                                            {
+                                                OfferingCardSmall ofcs1 = new OfferingCardSmall();
+                                                offering_name = reader.GetString("offering_name");
+                                                ofcs1.OfferingName = reader.GetString("offering_name");
+                                                ofcs1.OfferingPrice = reader.GetInt32("price");
+                                                ofcs1.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+                                                flpSearchResults.Controls.Add(ofcs1);
+                                                ofcs1.Click += new EventHandler(offeringCardSmall_Click);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void offeringCardSmall_Click(object sender, EventArgs e)
+        {
+            OfferingCardSmall ofcs = (OfferingCardSmall)sender;
+            OfferingDetailsForm odf = new OfferingDetailsForm(ofcs, fullname);
+            this.Hide();
+            odf.Show();
+        }
+
         /*
-         *                  if (reader.GetString("offering_type") == toBeServed)
-                            {
-                                OfferingCardMedium medium_card = new OfferingCardMedium();
-                                medium_card.OfferingName = reader.GetString("offering_name");
-                                medium_card.OfferingPrice = reader.GetInt32("price");
-                                medium_card.OfferingType = reader.GetString("offering_type");
-                                medium_card.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpMealOfTheDay.Controls.Add(medium_card);
-                                medium_card.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-                            if (reader.GetString("cuisine") == "Ethiopian")
-                            {
-                                OfferingCardMedium medium_card1 = new OfferingCardMedium();
-                                medium_card1.OfferingName = reader.GetString("offering_name");
-                                medium_card1.OfferingPrice = reader.GetInt32("price");
-                                medium_card1.OfferingType = reader.GetString("offering_type");
-                                medium_card1.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpEthiopianCuisine.Controls.Add(medium_card1);
-                                medium_card1.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-                            if (reader.GetString("cuisine") == "American")
-                            {
-                                OfferingCardMedium medium_card2 = new OfferingCardMedium();
-                                medium_card2.OfferingName = reader.GetString("offering_name");
-                                medium_card2.OfferingPrice = reader.GetInt32("price");
-                                medium_card2.OfferingType = reader.GetString("offering_type");
-                                medium_card2.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpAmericanCuisine.Controls.Add(medium_card2);
-                                medium_card2.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-                            if (reader.GetString("cuisine") == "Chinese")
-                            {
-                                OfferingCardMedium medium_card3 = new OfferingCardMedium();
-                                medium_card3.OfferingName = reader.GetString("offering_name");
-                                medium_card3.OfferingPrice = reader.GetInt32("price");
-                                medium_card3.OfferingType = reader.GetString("offering_type");
-                                medium_card3.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpChineseCuisine.Controls.Add(medium_card3);
-                                medium_card3.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-                            if (reader.GetString("course_of_meal") == "Entree")
-                            {
-                                OfferingCardMedium medium_card4 = new OfferingCardMedium();
-                                medium_card4.OfferingName = reader.GetString("offering_name");
-                                medium_card4.OfferingPrice = reader.GetInt32("price");
-                                medium_card4.OfferingType = reader.GetString("offering_type");
-                                medium_card4.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpEntrees.Controls.Add(medium_card4);
-                                medium_card4.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-                            if (reader.GetString("course_of_meal") == "Dessert")
-                            {
-                                OfferingCardMedium medium_card5 = new OfferingCardMedium();
-                                medium_card5.OfferingName = reader.GetString("offering_name");
-                                medium_card5.OfferingPrice = reader.GetInt32("price");
-                                medium_card5.OfferingType = reader.GetString("offering_type");
-                                medium_card5.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpDesserts.Controls.Add(medium_card5);
-                                medium_card5.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-                            if (reader.GetString("course_of_meal") == "Appetizer")
-                            {
-                                OfferingCardMedium medium_card6 = new OfferingCardMedium();
-                                medium_card6.OfferingName = reader.GetString("offering_name");
-                                medium_card6.OfferingPrice = reader.GetInt32("price");
-                                medium_card6.OfferingType = reader.GetString("offering_type");
-                                medium_card6.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                flpAppetizers.Controls.Add(medium_card6);
-                                medium_card6.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-                            }
-         * */
+*                  if (reader.GetString("offering_type") == toBeServed)
+{
+OfferingCardMedium medium_card = new OfferingCardMedium();
+medium_card.OfferingName = reader.GetString("offering_name");
+medium_card.OfferingPrice = reader.GetInt32("price");
+medium_card.OfferingType = reader.GetString("offering_type");
+medium_card.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpMealOfTheDay.Controls.Add(medium_card);
+medium_card.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+if (reader.GetString("cuisine") == "Ethiopian")
+{
+OfferingCardMedium medium_card1 = new OfferingCardMedium();
+medium_card1.OfferingName = reader.GetString("offering_name");
+medium_card1.OfferingPrice = reader.GetInt32("price");
+medium_card1.OfferingType = reader.GetString("offering_type");
+medium_card1.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpEthiopianCuisine.Controls.Add(medium_card1);
+medium_card1.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+if (reader.GetString("cuisine") == "American")
+{
+OfferingCardMedium medium_card2 = new OfferingCardMedium();
+medium_card2.OfferingName = reader.GetString("offering_name");
+medium_card2.OfferingPrice = reader.GetInt32("price");
+medium_card2.OfferingType = reader.GetString("offering_type");
+medium_card2.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpAmericanCuisine.Controls.Add(medium_card2);
+medium_card2.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+if (reader.GetString("cuisine") == "Chinese")
+{
+OfferingCardMedium medium_card3 = new OfferingCardMedium();
+medium_card3.OfferingName = reader.GetString("offering_name");
+medium_card3.OfferingPrice = reader.GetInt32("price");
+medium_card3.OfferingType = reader.GetString("offering_type");
+medium_card3.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpChineseCuisine.Controls.Add(medium_card3);
+medium_card3.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+if (reader.GetString("course_of_meal") == "Entree")
+{
+OfferingCardMedium medium_card4 = new OfferingCardMedium();
+medium_card4.OfferingName = reader.GetString("offering_name");
+medium_card4.OfferingPrice = reader.GetInt32("price");
+medium_card4.OfferingType = reader.GetString("offering_type");
+medium_card4.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpEntrees.Controls.Add(medium_card4);
+medium_card4.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+if (reader.GetString("course_of_meal") == "Dessert")
+{
+OfferingCardMedium medium_card5 = new OfferingCardMedium();
+medium_card5.OfferingName = reader.GetString("offering_name");
+medium_card5.OfferingPrice = reader.GetInt32("price");
+medium_card5.OfferingType = reader.GetString("offering_type");
+medium_card5.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpDesserts.Controls.Add(medium_card5);
+medium_card5.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+if (reader.GetString("course_of_meal") == "Appetizer")
+{
+OfferingCardMedium medium_card6 = new OfferingCardMedium();
+medium_card6.OfferingName = reader.GetString("offering_name");
+medium_card6.OfferingPrice = reader.GetInt32("price");
+medium_card6.OfferingType = reader.GetString("offering_type");
+medium_card6.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+flpAppetizers.Controls.Add(medium_card6);
+medium_card6.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
+}
+* */
     }
 }

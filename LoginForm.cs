@@ -62,7 +62,7 @@ namespace ProjectBlue
                 {
                     if (conn.State == ConnectionState.Closed)
                         conn.Open();
-                    string query = "select account_type, username, _password from `user_info`; ";
+                    string query = "select account_type, full_name, username, _password from `user_info`; ";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
