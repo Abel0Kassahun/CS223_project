@@ -34,26 +34,16 @@ namespace ProjectBlue
             set { _restaurantName = value; lblRestaurantName.Text = value; }
         }
 
-        private string _time;
-        public string Time
+        private string _offeringType;
+        public string OfferingType
         {
-            get { return _time; }
-            set { _time = value; lblTime.Text = value; }
+            get { return _offeringType; }
+            set { _offeringType = value; lblOfferingType.Text = value; }
         }
 
         public OfferingCardLarge()
         {
             InitializeComponent();
-        }
-
-        public OfferingCardLarge(Offering offering)
-        {
-            InitializeComponent();
-
-            OfferingImage = offering.Image;
-            OfferingName = offering.Name;
-            RestaurantName = offering.Restaurant.Name;
-            Time = "N/A";
         }
     }
 }

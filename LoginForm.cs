@@ -56,7 +56,7 @@ namespace ProjectBlue
                 string account_type;
                 string username;
                 string password;
-
+                string fullname;
                 string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
                 using (MySqlConnection conn = new MySqlConnection(connString))
                 {
@@ -72,7 +72,7 @@ namespace ProjectBlue
                                 account_type = reader.GetString("account_type");
                                 username = reader.GetString("username");
                                 password = reader.GetString("_password");
-
+                                fullname = reader.GetString("full_name");
                                 if (username == txtUsername.Text)
                                 {
                                     if (password == mtxtPassword.Text)
@@ -80,14 +80,14 @@ namespace ProjectBlue
                                         if (account_type == "Customer")
                                         {
                                             this.Hide();
-                                            CustomerMainForm cmf = new CustomerMainForm();
+                                            CustomerMainForm cmf = new CustomerMainForm(txtUsername.Text);
                                             cmf.Show();
                                             //this.Close();
                                         }
                                         if (account_type == "Manager")
                                         {
                                             this.Hide();
-                                            ManagerMainForm mmf = new ManagerMainForm();
+                                            ManagerMainForm mmf = new ManagerMainForm(fullname);
                                             mmf.Show();
                                             //this.Close();
                                         }

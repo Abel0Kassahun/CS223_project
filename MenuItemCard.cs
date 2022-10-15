@@ -42,13 +42,5 @@ namespace ProjectBlue
             InitializeComponent();
         }
 
-        public MenuItemCard(Offering offering1)
-        {
-            InitializeComponent();
-
-            OfferingImage = offering1.Image;
-            OfferingName = offering1.Name;
-            Price = offering1.Price;
-        }
     }
 }

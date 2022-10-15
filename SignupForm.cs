@@ -77,7 +77,7 @@ namespace ProjectBlue
                 }
                 else if (!(reg[2].IsMatch(txtUsername.Text)))
                 {
-                    errorProvider1.SetError(txtUsername, "First letter should be a letter");
+                    errorProvider1.SetError(txtUsername, "First letter should be an alphabet");
                 }
                 else if (mtxtPassword.Text.Length < 6)
                 {
@@ -121,20 +121,20 @@ namespace ProjectBlue
                         User usr = new User();
                         usr.AccountType = cbCustomer.Text;
                         usr.FullName = txtFullName.Text;
-                        usr.EmailType = txtEmailAddress.Text;
+                        usr.Email = txtEmailAddress.Text;
                         usr.Username = txtUsername.Text;
                         usr.Password = mtxtPassword.Text;
                         usr.save();
                         if(cbCustomer.Text == "Customer")
                         {
                             this.Hide();
-                            CustomerMainForm cmf = new CustomerMainForm();
+                            CustomerMainForm cmf = new CustomerMainForm(txtFullName.Text);
                             cmf.Show();
                         }
                         else if(cbCustomer.Text == "Manager")
                         {
                             this.Hide();
-                            ManagerMainForm mmf = new ManagerMainForm();
+                            ManagerMainForm mmf = new ManagerMainForm(txtFullName.Text);
                             mmf.Show();
                         }
                     }

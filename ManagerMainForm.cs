@@ -13,11 +13,12 @@ namespace ProjectBlue
 {
     public partial class ManagerMainForm : KryptonForm
     {
-        public ManagerMainForm()
+        string fullname;
+        public ManagerMainForm(string fullname)
         {
             InitializeComponent();
-
-            LoadForm(new ViewAddedItemsForm());
+            this.fullname = fullname;
+            LoadForm(new ViewAddedItemsForm(fullname));
             SidePanelIndicator.Top = btnView.Top;
         }
 
@@ -45,7 +46,7 @@ namespace ProjectBlue
         private void btnView_Click(object sender, EventArgs e)
         {
             SidePanelIndicator.Top = btnView.Top;
-            LoadForm(new ViewAddedItemsForm());
+            LoadForm(new ViewAddedItemsForm(fullname));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -57,7 +58,7 @@ namespace ProjectBlue
         private void btnAccount_Click(object sender, EventArgs e)
         {
             SidePanelIndicator.Top = btnAccount.Top;
-            LoadForm(new ManagerAccountForm());
+            LoadForm(new ManagerAccountForm(fullname));
         }
     }
 }

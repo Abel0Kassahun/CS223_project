@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,9 +14,64 @@ namespace ProjectBlue
 {
     public partial class ManagerAccountForm : Form
     {
-        public ManagerAccountForm()
+        string fullname;
+        public ManagerAccountForm(string fullname)
         {
             InitializeComponent();
+            this.fullname = fullname;
+        }
+
+        private void ManagerAccountForm_Load(object sender, EventArgs e)
+        {
+            lblFullName.Text = fullname;
+            int rid;
+            string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+                string query = "select * from `user_info`";
+                string query1 = "select * from `retaurant_manager`, `restaurant`";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (fullname == reader.GetString("full_name"))
+                            {
+                                lblUsername.Text = reader.GetString("username");
+                                lblEmailAddress.Text = reader.GetString("email");
+                            }
+                        }
+                    }
+                }
+                using (MySqlCommand cmd = new MySqlCommand(query1, conn))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (fullname == reader.GetString("full_name"))
+                            {
+                                rid = reader.GetInt32("rid");
+                                if(rid == reader.GetInt32("restaurant_id"))
+                                {
+                                    lblPhoneNumber.Text = reader.GetString("phone_number");
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginForm login = new LoginForm();
+            login.Show();
         }
     }
 }

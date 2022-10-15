@@ -66,16 +66,5 @@ namespace ProjectBlue
             InitializeComponent();
         }
 
-        public OfferingDetailsCardLarge(Offering offering1)
-        {
-            InitializeComponent();
-
-            OfferingName = offering1.Name;
-            Price = offering1.Price;
-            RestaurantName = offering1.Restaurant.Name;
-            ServiceOptions = offering1.ServiceOptions;
-            EWT = offering1.EWT;
-            ETA = offering1.ETA;
-        }
     }
 }

@@ -41,14 +41,5 @@ namespace ProjectBlue
         {
             InitializeComponent();
         }
-
-        public OfferingDetailsCardSmall(Offering offering1)
-        {
-            InitializeComponent();
-
-            MealOfTheDay = offering1.MealOfTheDay;
-            CourseOfMeal = offering1.CourseOfMeal;
-            Cuisine = offering1.Cuisine;
-        }
     }
 }

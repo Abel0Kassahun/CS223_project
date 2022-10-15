@@ -221,7 +221,6 @@
             this.offeringCardLarge4.RestaurantName = "Trattoria Gusto";
             this.offeringCardLarge4.Size = new System.Drawing.Size(220, 325);
             this.offeringCardLarge4.TabIndex = 13;
-            this.offeringCardLarge4.Time = "24:32";
             // 
             // offeringCardLarge1
             // 
@@ -235,7 +234,6 @@
             this.offeringCardLarge1.RestaurantName = "Pastry";
             this.offeringCardLarge1.Size = new System.Drawing.Size(220, 325);
             this.offeringCardLarge1.TabIndex = 14;
-            this.offeringCardLarge1.Time = "09:37";
             // 
             // offeringCardLarge2
             // 
@@ -249,7 +247,6 @@
             this.offeringCardLarge2.RestaurantName = "Sapore Restaurant";
             this.offeringCardLarge2.Size = new System.Drawing.Size(220, 325);
             this.offeringCardLarge2.TabIndex = 15;
-            this.offeringCardLarge2.Time = "40:13";
             // 
             // pictureBox6
             // 

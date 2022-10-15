@@ -46,7 +46,7 @@ namespace ProjectBlue
         {
             InitializeComponent();
 
-            RestaurantName = restaurant1.Name;
+            RestaurantName = restaurant1.Restaurant_Name;
             Address = restaurant1.Address;
             PhoneNumber = restaurant1.PhoneNumber;
         }

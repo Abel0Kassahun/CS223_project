@@ -18,7 +18,8 @@ namespace ProjectBlue
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new LoginForm());
             //Application.Run(new SignupForm());
-            Application.Run(new CustomerMainForm());
+            Application.Run(new CustomerMainForm("abel"));
+            //Application.Run(new ManagerMainForm());
         }
     }
 }

@@ -38,13 +38,5 @@ namespace ProjectBlue
         {
             InitializeComponent();
         }
-
-        public OfferingCardFav(Offering offering)
-        {
-            InitializeComponent();
-            OfferingImage = offering.Image;
-            OfferingName = offering.Name;
-            OfferingPrice = offering.Price;
-        }
     }
 }

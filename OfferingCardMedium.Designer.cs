@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.lblRestaurantName = new MaterialSkin.Controls.MaterialLabel();
+            this.lblOfferingType = new MaterialSkin.Controls.MaterialLabel();
             this.lblOfferingPrice = new MaterialSkin.Controls.MaterialLabel();
             this.lblOfferingName = new MaterialSkin.Controls.MaterialLabel();
             this.pbOfferingImage = new System.Windows.Forms.PictureBox();
@@ -40,7 +40,7 @@
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard1.Controls.Add(this.lblRestaurantName);
+            this.materialCard1.Controls.Add(this.lblOfferingType);
             this.materialCard1.Controls.Add(this.lblOfferingPrice);
             this.materialCard1.Controls.Add(this.lblOfferingName);
             this.materialCard1.Controls.Add(this.pbOfferingImage);
@@ -56,17 +56,17 @@
             this.materialCard1.Size = new System.Drawing.Size(375, 150);
             this.materialCard1.TabIndex = 0;
             // 
-            // lblRestaurantName
+            // lblOfferingType
             // 
-            this.lblRestaurantName.AutoSize = true;
-            this.lblRestaurantName.Depth = 0;
-            this.lblRestaurantName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblRestaurantName.Location = new System.Drawing.Point(170, 97);
-            this.lblRestaurantName.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblRestaurantName.Name = "lblRestaurantName";
-            this.lblRestaurantName.Size = new System.Drawing.Size(124, 19);
-            this.lblRestaurantName.TabIndex = 3;
-            this.lblRestaurantName.Text = "Restaurant Name";
+            this.lblOfferingType.AutoSize = true;
+            this.lblOfferingType.Depth = 0;
+            this.lblOfferingType.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblOfferingType.Location = new System.Drawing.Point(170, 97);
+            this.lblOfferingType.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblOfferingType.Name = "lblOfferingType";
+            this.lblOfferingType.Size = new System.Drawing.Size(98, 19);
+            this.lblOfferingType.TabIndex = 3;
+            this.lblOfferingType.Text = "Offering Type";
             // 
             // lblOfferingPrice
             // 
@@ -122,7 +122,7 @@
 
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private System.Windows.Forms.PictureBox pbOfferingImage;
-        private MaterialSkin.Controls.MaterialLabel lblRestaurantName;
+        private MaterialSkin.Controls.MaterialLabel lblOfferingType;
         private MaterialSkin.Controls.MaterialLabel lblOfferingPrice;
         private MaterialSkin.Controls.MaterialLabel lblOfferingName;
     }

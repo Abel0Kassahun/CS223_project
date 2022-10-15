@@ -13,10 +13,10 @@ namespace ProjectBlue.Model_Classes
     public class User
     {
         static List<User> user = new List<User>();
+        public string AccountType { get; set; }
         public string FullName { get; set; }
         public string Username { get; set; } // should uniquely identify a user
-        public string AccountType { get; set; }
-        public string EmailType { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
 
         public void save()
@@ -32,7 +32,7 @@ namespace ProjectBlue.Model_Classes
                 {
                     cmd.Parameters.AddWithValue("@account_type", AccountType);
                     cmd.Parameters.AddWithValue("@fullname", FullName);
-                    cmd.Parameters.AddWithValue("@email", EmailType);
+                    cmd.Parameters.AddWithValue("@email", Email);
                     cmd.Parameters.AddWithValue("@username", Username);
                     cmd.Parameters.AddWithValue("@password", Password);//this might be done by a a loop since its a char array
                     cmd.ExecuteNonQuery();
@@ -59,8 +59,8 @@ namespace ProjectBlue.Model_Classes
                             usr.AccountType = reader.GetString(reader.GetOrdinal("account_type"));
                             usr.Username = reader.GetString(reader.GetOrdinal("username"));
                             usr.Password = reader.GetString(reader.GetOrdinal("_password"));
-                            usr.EmailType = reader.GetString(reader.GetOrdinal("email"));
-                            user.Add(usr);
+                            usr.Email = reader.GetString(reader.GetOrdinal("email"));
+                            user.Add(usr);     
                         }
                     }
                 }
