@@ -1,7 +1,8 @@
 # Enibla Restaurant App
-##Group Memebers
+# Group Memebers
   Abel 
   Eyob 
   Eyosias 
   Michael 
-##Section DRBSE2102A
+# Section 
+DRBSE2102A
