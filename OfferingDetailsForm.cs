@@ -22,12 +22,13 @@ namespace ProjectBlue
         private  string offeringPrice;
         private int rid;
         private string fullname;
+        private Form form;
         public OfferingDetailsForm()
         {
             InitializeComponent();
 
         }
-        public OfferingDetailsForm(OfferingCardMedium selected, string fullname)
+        public OfferingDetailsForm(OfferingCardMedium selected, string fullname, Form form )
         {
             //for CustomerMainForm home tab page
             InitializeComponent();
@@ -39,8 +40,12 @@ namespace ProjectBlue
             txtlabelOrder.Show();
             
             lbloffering_name.Text = selected.OfferingName;
+
+            HideTextBoxes();
+            this.form = form;
+
         }
-        public OfferingDetailsForm(OfferingCardSmall selected, string fullname)
+        public OfferingDetailsForm(OfferingCardSmall selected, string fullname, Form form)
         {
             //for CustomerMainForm search tab page
             InitializeComponent();
@@ -52,6 +57,10 @@ namespace ProjectBlue
             txtlabelOrder.Show();
 
             lbloffering_name.Text = selected.OfferingName;
+
+            HideTextBoxes();
+
+            this.form = form;
         }
 
         public OfferingDetailsForm(OfferingCardLarge selected, Form vaf)
@@ -63,9 +72,14 @@ namespace ProjectBlue
             lblCancel.Hide();
             txtlabelFav.Hide();
             txtlabelOrder.Hide();
+            
             lbloffering_name.Text = selected.OfferingName;
+
+            HideTextBoxes();
+
+            this.form = vaf;
         }
-        public OfferingDetailsForm(OfferingCardFav selected, string fullname)
+        public OfferingDetailsForm(OfferingCardFav selected, string fullname, CustomerMainForm form)
         {
             //for the favourites tab page
             InitializeComponent();
@@ -74,11 +88,18 @@ namespace ProjectBlue
             pbEdit.Hide();
             lblSave.Hide();
             lblCancel.Hide();
-            txtlabelFav.Hide();
+
             txtlabelOrder.Show();
+            
+            txtlabelFav.Text = "Remove from favourite";
+
             lbloffering_name.Text = selected.OfferingName;
+            
+            HideTextBoxes();
+
+            this.form = form;
         }
-        public OfferingDetailsForm(OfferingCardLarge selected, string fullname)
+        public OfferingDetailsForm(OfferingCardLarge selected, string fullname, CustomerMainForm form)
         {
             //for the order tab page 
             InitializeComponent();
@@ -87,9 +108,26 @@ namespace ProjectBlue
             pbEdit.Hide();
             lblSave.Hide();
             lblCancel.Hide();
+            
             txtlabelFav.Show();
-            txtlabelOrder.Hide();
+            
+            txtlabelOrder.Text = "Remove from order";
+            
             lbloffering_name.Text = selected.OfferingName;
+
+            HideTextBoxes();
+
+            this.form = form;
+        }
+        private void HideTextBoxes()
+        {
+            txtOfferingType.Hide();
+            txtCourseOfMeal.Hide();
+            txtCuisine.Hide();
+            txtOffering_name.Hide();
+            txtPrice.Hide();
+            txtEWT.Hide();
+            txtETA.Hide();
         }
 
         private void OfferingDetailsForm_Load(object sender, EventArgs e)
@@ -99,7 +137,7 @@ namespace ProjectBlue
             {
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
-                string query = "select * from offerings, restaurant";
+                string query = "select * from offerings, restaurant where rid = restaurant_id";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -113,9 +151,23 @@ namespace ProjectBlue
                                 lblcourse_of_meal.Text = reader.GetString("course_of_meal");
                                 lblcousine.Text = reader.GetString("cuisine");
                                 lblprice.Text = reader.GetString("price") + " ETB";
-                                lblservice_options.Text += reader.GetString("service_options");
-                                lblEWT.Text = reader.GetString("EWT");
-                                lblETA.Text = reader.GetString("EAT");
+                                lblservice_options.Text = reader.GetString("service_options");
+                                if (!DBNull.Value.Equals(reader["EWT"]))
+                                {
+                                    lblEWT.Text = reader.GetString("EWT");
+                                }
+                                else
+                                {
+                                    lblEWT.Text = "-";
+                                }
+                                if (!DBNull.Value.Equals(reader["ETA"]))
+                                {
+                                    lblETA.Text = reader.GetString("ETA");
+                                }
+                                else
+                                {
+                                    lblETA.Text = "-";
+                                }
                                 pictureBox1.Image = ConvertByteArrToImage((byte[])reader[3]);
                                 offeringPrice = reader.GetString("price");
                                 image = (byte[])reader[3];
@@ -140,45 +192,73 @@ namespace ProjectBlue
 
         private void pbClose_Click(object sender, EventArgs e)
         {
-            CustomerMainForm cmf = new CustomerMainForm(fullname);
+            form.Show();
             this.Close();
-            cmf.Show();
         }
 
         private void txtlabelFav_Click(object sender, EventArgs e)
         {
-            int id;
-            string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            using (MySqlConnection conn = new MySqlConnection(connString))
+            if(txtlabelFav.Text == "Remove from favourite")
             {
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-                string query = "Select * from `favourites`";
-                string query1 = "insert into `favourites` values(@full_name, @offering_name, @offering_image, @price)";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                //remove
+                string query = "DELETE FROM favourites WHERE offering_name = @offering_name";
+                string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                using (MySqlConnection conn = new MySqlConnection(connString))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@offering_name", lbloffering_name.Text);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show(lbloffering_name.Text + " has been removed from favourites", "Success");
+                txtlabelFav.Text = "Set as Favourite";
+            }
+            else
+            {
+                int id;
+                bool notFavouriteYet = true;
+                string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+                    string query = "Select * from `favourites`";
+                    string query1 = "insert into `favourites` values (@full_name, @offering_name, @offering_image, @price)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            if (fullname == reader.GetString("full_name"))
+                            while (reader.Read())
                             {
-                                if (lbloffering_name.Text == reader.GetString("offering_name"))
+                                if (fullname == reader.GetString("full_name"))
                                 {
-                                    MessageBox.Show("This has already been set as favourite");
-                                }
-                                else
-                                {
-                                    using (MySqlCommand cmd1 = new MySqlCommand(query1, conn))
+                                    if (lbloffering_name.Text == reader.GetString("offering_name"))
                                     {
-                                        cmd.Parameters.AddWithValue("@full_name", fullname);
-                                        cmd.Parameters.AddWithValue("@offering_name", lbloffering_name.Text);
-                                        cmd.Parameters.AddWithValue("@offering_image", image);
-                                        cmd.Parameters.AddWithValue("@price", offeringPrice);
+                                        MessageBox.Show("This has already been set as favourite");
+                                        notFavouriteYet = false;
                                     }
                                 }
                             }
                         }
+                    }
+                    if (notFavouriteYet)
+                    {
+                        using (MySqlCommand cmd1 = new MySqlCommand(query1, conn))
+                        {
+                            cmd1.Parameters.AddWithValue("@full_name", fullname);
+                            cmd1.Parameters.AddWithValue("@offering_name", lbloffering_name.Text);
+                            cmd1.Parameters.AddWithValue("@offering_image", image);
+                            cmd1.Parameters.AddWithValue("@price", offeringPrice);
+
+                            cmd1.ExecuteNonQuery();
+
+                        }
+                        MessageBox.Show(lbloffering_name.Text + " has been set as favourite", "Success");
+                        txtlabelFav.Hide();
                     }
                 }
             }
@@ -186,45 +266,74 @@ namespace ProjectBlue
 
         private void txtlabelOrder_Click(object sender, EventArgs e)
         {
-            string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            using (MySqlConnection conn = new MySqlConnection(connString))
+            if(txtlabelOrder.Text == "Remove from order")
             {
-                if (conn.State == ConnectionState.Closed)
-                    conn.Open();
-                string query = "select * from orders";
-                string query1 = "insert into `orders` values(@full_name, @offering_name, @restaurant_name, @offering_image, @offering_type)";
-                using (MySqlCommand cmd = new MySqlCommand(query1, conn))
+                string query = "DELETE FROM orders WHERE offering_name = @offering_name";
+                string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                using (MySqlConnection conn = new MySqlConnection(connString))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@offering_name", lbloffering_name.Text);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show(lbloffering_name.Text + " has been canceled from current orders", "Success");
+
+                txtlabelOrder.Text = "Order";
+            }
+            else
+            {
+                bool notOrderedYet = true;
+                string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+                    string query = "select * from orders";
+                    string query1 = "insert into `orders` values(@full_name, @offering_name, @restaurant_name, @offering_image, @offering_type)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            if (fullname == reader.GetString("full_name"))
+                            while (reader.Read())
                             {
-                                if (lbloffering_name.Text == reader.GetString("offering_name"))
+                                if (fullname == reader.GetString("full_name"))
                                 {
-                                    MessageBox.Show("This has already been ordered");
-                                }
-                                else
-                                {
-                                    using (MySqlCommand cmd1 = new MySqlCommand(query1, conn))
+                                    if (lbloffering_name.Text == reader.GetString("offering_name"))
                                     {
-                                        cmd.Parameters.AddWithValue("@full_name", fullname);
-                                        cmd.Parameters.AddWithValue("@offering_name", lbloffering_name.Text);
-                                        cmd.Parameters.AddWithValue("@offering_image", image);
-                                        cmd.Parameters.AddWithValue("@offering_type", lblofferingType.Text);
-                                        cmd.Parameters.AddWithValue("@restaurant_name", lblrestaurant_name.Text);
+                                        MessageBox.Show("This has already been ordered");
+                                        notOrderedYet = false;
                                     }
                                 }
                             }
                         }
                     }
+                    if (notOrderedYet)
+                    {
+                        using (MySqlCommand cmd1 = new MySqlCommand(query1, conn))
+                        {
+                            cmd1.Parameters.AddWithValue("@full_name", fullname);
+                            cmd1.Parameters.AddWithValue("@offering_name", lbloffering_name.Text);
+                            cmd1.Parameters.AddWithValue("@offering_image", image);
+                            cmd1.Parameters.AddWithValue("@offering_type", lblofferingType.Text);
+                            cmd1.Parameters.AddWithValue("@restaurant_name", lblrestaurant_name.Text);
+
+                            cmd1.ExecuteNonQuery();
+                        }
+                        MessageBox.Show(lbloffering_name.Text + " has been ordered", "Succcess");
+                        txtlabelOrder.Hide();
+                    }
                 }
-            }
+            }  
         }
 
         private void pbEdit_Click(object sender, EventArgs e)
         {
+            pbEdit.Hide();
             lblSave.Show();
             lblCancel.Show();
 
@@ -242,7 +351,6 @@ namespace ProjectBlue
             txtCuisine.Show();
             txtOffering_name.Show();
             txtPrice.Show();
-            txtServiceOptions.Show();
             txtEWT.Show();
             txtETA.Show();
         }
@@ -293,8 +401,8 @@ namespace ProjectBlue
             else
             {
                 Regex[] reg = new Regex[3];
-                reg[0] = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");//for offering and restaurant name
-                reg[1] = new Regex(@"[1-9]{1}[0-9]+$");//for price, EWT and ETA
+                reg[0] = new Regex(@"^[A-Z]{1}[a-zA-Z ]+$");//for offering and restaurant name
+                reg[1] = new Regex(@"^[0-9]+$");//for price, EWT and ETA
 
                 if (!(reg[0].IsMatch(txtOffering_name.Text)))
                 {
@@ -320,11 +428,11 @@ namespace ProjectBlue
                         {
                             errorProvider1.SetError(txtOfferingType, "Incorrect Offering Type Name format!,\n Correct name example: \"Break Fast, Lunch or Dinenr\"");
                         }
-                        else if (txtCourseOfMeal.Text != course_of_meal[i])
+                        if (txtCourseOfMeal.Text != course_of_meal[i])
                         {
                             errorProvider1.SetError(txtCourseOfMeal, "Incorrect Course of Meal Name format!,\n Correct name example: \"Main, Appetizer, Desert\"");
                         }
-                        else if (txtCuisine.Text != couisine[i])
+                        if (txtCuisine.Text != couisine[i])
                         {
                             errorProvider1.SetError(txtCuisine, "Incorrect Cuisine Name format!,\n Correct name example: \"Ethiopian, American or Chinese\"");
                         }
@@ -339,24 +447,35 @@ namespace ProjectBlue
                     }
                     else
                     {
-                        Offering off = new Offering();
-                        off.Offering_image = image;
-                        off.Offering_name = txtOffering_name.Text;
-                        off.Price = int.Parse(txtPrice.Text);
-                        off.ServiceOptions = txtServiceOptions.Text;
-                        off.EWT = int.Parse(txtEWT.Text);
-                        off.ETA = int.Parse(txtETA.Text);
-                        off.offering_type = txtOfferingType.Text;
-                        off.CourseOfMeal = txtCourseOfMeal.Text;
-                        off.Cuisine = txtCuisine.Text;
-                        off.save();
+                        /*
+                        string query = "update offerings\n" +
+                                       "set address = @address, address_on_map = @link, phone_number = @phone_number, " +
+                                       "opening_and_closing_time = @opening_and_closing_time \n" +
+                                       "where restaurant_id = @id";
+                        string path = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        using (MySqlConnection con = new MySqlConnection(path))
+                        {
+                            if (con.State == ConnectionState.Closed)
+                                con.Open();
+                            using (MySqlCommand comm = new MySqlCommand(query, con))
+                            {
+                                comm.Parameters.AddWithValue("@address", txtboxlocation.Text);
+                                comm.Parameters.AddWithValue("@link", materialTextBox6.Text);
+                                comm.Parameters.AddWithValue("@phone_number", materialTextBox3.Text);
+                                comm.Parameters.AddWithValue("@id", id);
+                                comm.Parameters.AddWithValue("@opening_and_closing_time", materialTextBox4.Text);
+
+                                comm.ExecuteNonQuery();
+                            }
+                        }
+                        */
 
                         lblofferingType.Text = txtOfferingType.Text;
                         lblcourse_of_meal.Text = txtCourseOfMeal.Text;
                         lblcousine.Text = txtCuisine.Text;
                         lbloffering_name.Text = txtOffering_name.Text;
                         lblprice.Text = txtPrice.Text + " " + "ETB";
-                        lblservice_options.Text = txtServiceOptions.Text;
+
                         lblEWT.Text = txtEWT.Text + " " + "min";
                         lblETA.Text = txtETA.Text + " " + "min";
                     }
@@ -368,7 +487,6 @@ namespace ProjectBlue
         {
             lblCancel.Hide();
             lblSave.Hide();
-            pbEdit.Hide();
 
             lblofferingType.Show();
             lblcourse_of_meal.Show();
@@ -384,7 +502,6 @@ namespace ProjectBlue
             txtCuisine.Hide();
             txtOffering_name.Hide();
             txtPrice.Hide();
-            txtServiceOptions.Hide();
             txtEWT.Hide();
             txtETA.Hide();
         }

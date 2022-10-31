@@ -57,6 +57,7 @@ namespace ProjectBlue
                 string username;
                 string password;
                 string fullname;
+                
                 string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
                 using (MySqlConnection conn = new MySqlConnection(connString))
                 {
@@ -80,7 +81,7 @@ namespace ProjectBlue
                                         if (account_type == "Customer")
                                         {
                                             this.Hide();
-                                            CustomerMainForm cmf = new CustomerMainForm(txtUsername.Text);
+                                            CustomerMainForm cmf = new CustomerMainForm(fullname);
                                             cmf.Show();
                                             //this.Close();
                                         }

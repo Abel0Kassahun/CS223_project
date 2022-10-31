@@ -47,6 +47,8 @@
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.flpMealOfTheDay = new System.Windows.Forms.FlowLayoutPanel();
             this.tbSearch = new System.Windows.Forms.TabPage();
+            this.materialButtonRefresh = new MaterialSkin.Controls.MaterialButton();
+            this.searchbyFilterOnly = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -315,6 +317,8 @@
             // 
             this.tbSearch.AutoScroll = true;
             this.tbSearch.BackColor = System.Drawing.Color.White;
+            this.tbSearch.Controls.Add(this.materialButtonRefresh);
+            this.tbSearch.Controls.Add(this.searchbyFilterOnly);
             this.tbSearch.Controls.Add(this.materialLabel9);
             this.tbSearch.Controls.Add(this.materialCard1);
             this.tbSearch.Controls.Add(this.flpSearchResults);
@@ -330,13 +334,53 @@
             this.tbSearch.TabIndex = 1;
             this.tbSearch.Text = "Search";
             // 
+            // materialButtonRefresh
+            // 
+            this.materialButtonRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonRefresh.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButtonRefresh.Depth = 0;
+            this.materialButtonRefresh.HighEmphasis = true;
+            this.materialButtonRefresh.Icon = null;
+            this.materialButtonRefresh.Location = new System.Drawing.Point(793, 155);
+            this.materialButtonRefresh.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonRefresh.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonRefresh.Name = "materialButtonRefresh";
+            this.materialButtonRefresh.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButtonRefresh.Size = new System.Drawing.Size(84, 36);
+            this.materialButtonRefresh.TabIndex = 23;
+            this.materialButtonRefresh.Text = "Refresh";
+            this.materialButtonRefresh.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonRefresh.UseAccentColor = false;
+            this.materialButtonRefresh.UseVisualStyleBackColor = true;
+            this.materialButtonRefresh.Click += new System.EventHandler(this.materialButtonRefresh_Click);
+            // 
+            // searchbyFilterOnly
+            // 
+            this.searchbyFilterOnly.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchbyFilterOnly.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.searchbyFilterOnly.Depth = 0;
+            this.searchbyFilterOnly.HighEmphasis = true;
+            this.searchbyFilterOnly.Icon = null;
+            this.searchbyFilterOnly.Location = new System.Drawing.Point(52, 124);
+            this.searchbyFilterOnly.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.searchbyFilterOnly.MouseState = MaterialSkin.MouseState.HOVER;
+            this.searchbyFilterOnly.Name = "searchbyFilterOnly";
+            this.searchbyFilterOnly.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.searchbyFilterOnly.Size = new System.Drawing.Size(191, 36);
+            this.searchbyFilterOnly.TabIndex = 21;
+            this.searchbyFilterOnly.Text = "Search by filter only";
+            this.searchbyFilterOnly.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.searchbyFilterOnly.UseAccentColor = false;
+            this.searchbyFilterOnly.UseVisualStyleBackColor = true;
+            this.searchbyFilterOnly.Click += new System.EventHandler(this.searchbyFilterOnly_Click);
+            // 
             // materialLabel9
             // 
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.materialLabel9.Location = new System.Drawing.Point(782, 46);
+            this.materialLabel9.ForeColor = System.Drawing.Color.Red;
+            this.materialLabel9.Location = new System.Drawing.Point(770, 46);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(107, 19);
@@ -356,12 +400,12 @@
             this.materialCard1.Controls.Add(this.materialLabel2);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(53, 187);
+            this.materialCard1.Location = new System.Drawing.Point(52, 201);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
-            this.materialCard1.Size = new System.Drawing.Size(368, 441);
+            this.materialCard1.Size = new System.Drawing.Size(368, 458);
             this.materialCard1.TabIndex = 17;
             // 
             // groupBox1
@@ -445,6 +489,7 @@
             this.materialSlider1.Size = new System.Drawing.Size(333, 40);
             this.materialSlider1.TabIndex = 28;
             this.materialSlider1.Text = "";
+            this.materialSlider1.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.materialSlider1_onValueChanged);
             // 
             // materialTextBox22
             // 
@@ -475,6 +520,7 @@
             this.materialTextBox22.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.materialTextBox22.TrailingIcon = null;
             this.materialTextBox22.UseSystemPasswordChar = false;
+            this.materialTextBox22.KeyDown += new System.Windows.Forms.KeyEventHandler(this.materialTextBox22_KeyDown);
             // 
             // materialDivider6
             // 
@@ -529,7 +575,7 @@
             // flpSearchResults
             // 
             this.flpSearchResults.AutoScroll = true;
-            this.flpSearchResults.Location = new System.Drawing.Point(496, 183);
+            this.flpSearchResults.Location = new System.Drawing.Point(500, 201);
             this.flpSearchResults.Margin = new System.Windows.Forms.Padding(4);
             this.flpSearchResults.Name = "flpSearchResults";
             this.flpSearchResults.Size = new System.Drawing.Size(733, 1034);
@@ -584,7 +630,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(4, 1213);
+            this.panel1.Location = new System.Drawing.Point(4, 1231);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1399, 50);
@@ -915,7 +961,7 @@
             this.Padding = new System.Windows.Forms.Padding(0, 98, 4, 4);
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Enbila";
+            this.Text = "Enibla";
             this.Load += new System.EventHandler(this.CustomerMainForm_Load);
             this.materialTabControl1.ResumeLayout(false);
             this.tbHome.ResumeLayout(false);
@@ -996,6 +1042,8 @@
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private MaterialSkin.Controls.MaterialButton searchbyFilterOnly;
+        private MaterialSkin.Controls.MaterialButton materialButtonRefresh;
     }
 }
 

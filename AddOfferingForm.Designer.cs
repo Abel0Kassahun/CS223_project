@@ -38,7 +38,6 @@
             this.materialCheckbox2 = new MaterialSkin.Controls.MaterialCheckbox();
             this.materialCheckbox3 = new MaterialSkin.Controls.MaterialCheckbox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtRestaurantName = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtOfferingName = new MaterialSkin.Controls.MaterialTextBox2();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPrice = new MaterialSkin.Controls.MaterialTextBox2();
@@ -58,8 +57,6 @@
             this.materialRadioButton6 = new MaterialSkin.Controls.MaterialRadioButton();
             this.gpCuisine = new System.Windows.Forms.GroupBox();
             this.materialRadioButton11 = new MaterialSkin.Controls.MaterialRadioButton();
-            this.materialRadioButton12 = new MaterialSkin.Controls.MaterialRadioButton();
-            this.materialRadioButton7 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton8 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton9 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
@@ -190,6 +187,7 @@
             this.materialCheckbox1.TabIndex = 30;
             this.materialCheckbox1.Text = "Dine-in";
             this.materialCheckbox1.UseVisualStyleBackColor = true;
+            this.materialCheckbox1.Click += new System.EventHandler(this.materialCheckbox1_Click);
             // 
             // materialCheckbox2
             // 
@@ -222,6 +220,7 @@
             this.materialCheckbox3.TabIndex = 32;
             this.materialCheckbox3.Text = "Delivery";
             this.materialCheckbox3.UseVisualStyleBackColor = true;
+            this.materialCheckbox3.Click += new System.EventHandler(this.materialCheckbox3_Click);
             // 
             // materialLabel1
             // 
@@ -236,36 +235,6 @@
             this.materialLabel1.Size = new System.Drawing.Size(141, 24);
             this.materialLabel1.TabIndex = 33;
             this.materialLabel1.Text = "Service Options";
-            // 
-            // txtRestaurantName
-            // 
-            this.txtRestaurantName.AnimateReadOnly = false;
-            this.txtRestaurantName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtRestaurantName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtRestaurantName.Depth = 0;
-            this.txtRestaurantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtRestaurantName.HideSelection = true;
-            this.txtRestaurantName.Hint = "Restaurant Name";
-            this.txtRestaurantName.LeadingIcon = null;
-            this.txtRestaurantName.Location = new System.Drawing.Point(401, 298);
-            this.txtRestaurantName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRestaurantName.MaxLength = 32767;
-            this.txtRestaurantName.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtRestaurantName.Name = "txtRestaurantName";
-            this.txtRestaurantName.PasswordChar = '\0';
-            this.txtRestaurantName.PrefixSuffixText = null;
-            this.txtRestaurantName.ReadOnly = false;
-            this.txtRestaurantName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtRestaurantName.SelectedText = "";
-            this.txtRestaurantName.SelectionLength = 0;
-            this.txtRestaurantName.SelectionStart = 0;
-            this.txtRestaurantName.ShortcutsEnabled = true;
-            this.txtRestaurantName.Size = new System.Drawing.Size(299, 48);
-            this.txtRestaurantName.TabIndex = 29;
-            this.txtRestaurantName.TabStop = false;
-            this.txtRestaurantName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtRestaurantName.TrailingIcon = null;
-            this.txtRestaurantName.UseSystemPasswordChar = false;
             // 
             // txtOfferingName
             // 
@@ -474,7 +443,7 @@
             this.gbMealOfTheDay.Margin = new System.Windows.Forms.Padding(4);
             this.gbMealOfTheDay.Name = "gbMealOfTheDay";
             this.gbMealOfTheDay.Padding = new System.Windows.Forms.Padding(4);
-            this.gbMealOfTheDay.Size = new System.Drawing.Size(320, 204);
+            this.gbMealOfTheDay.Size = new System.Drawing.Size(347, 204);
             this.gbMealOfTheDay.TabIndex = 73;
             this.gbMealOfTheDay.TabStop = false;
             this.gbMealOfTheDay.Text = "Meal of the Day";
@@ -521,7 +490,7 @@
             this.gpCourseOfMeal.Margin = new System.Windows.Forms.Padding(4);
             this.gpCourseOfMeal.Name = "gpCourseOfMeal";
             this.gpCourseOfMeal.Padding = new System.Windows.Forms.Padding(4);
-            this.gpCourseOfMeal.Size = new System.Drawing.Size(299, 204);
+            this.gpCourseOfMeal.Size = new System.Drawing.Size(362, 204);
             this.gpCourseOfMeal.TabIndex = 76;
             this.gpCourseOfMeal.TabStop = false;
             this.gpCourseOfMeal.Text = "Course of Meal";
@@ -577,16 +546,14 @@
             // gpCuisine
             // 
             this.gpCuisine.Controls.Add(this.materialRadioButton11);
-            this.gpCuisine.Controls.Add(this.materialRadioButton12);
-            this.gpCuisine.Controls.Add(this.materialRadioButton7);
             this.gpCuisine.Controls.Add(this.materialRadioButton8);
             this.gpCuisine.Controls.Add(this.materialRadioButton9);
             this.gpCuisine.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpCuisine.Location = new System.Drawing.Point(809, 422);
+            this.gpCuisine.Location = new System.Drawing.Point(835, 422);
             this.gpCuisine.Margin = new System.Windows.Forms.Padding(4);
             this.gpCuisine.Name = "gpCuisine";
             this.gpCuisine.Padding = new System.Windows.Forms.Padding(4);
-            this.gpCuisine.Size = new System.Drawing.Size(396, 204);
+            this.gpCuisine.Size = new System.Drawing.Size(349, 204);
             this.gpCuisine.TabIndex = 77;
             this.gpCuisine.TabStop = false;
             this.gpCuisine.Text = "Cuisine";
@@ -595,7 +562,7 @@
             // 
             this.materialRadioButton11.AutoSize = true;
             this.materialRadioButton11.Depth = 0;
-            this.materialRadioButton11.Location = new System.Drawing.Point(216, 46);
+            this.materialRadioButton11.Location = new System.Drawing.Point(31, 146);
             this.materialRadioButton11.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton11.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton11.MouseState = MaterialSkin.MouseState.HOVER;
@@ -606,38 +573,6 @@
             this.materialRadioButton11.TabStop = true;
             this.materialRadioButton11.Text = "Chinese";
             this.materialRadioButton11.UseVisualStyleBackColor = true;
-            // 
-            // materialRadioButton12
-            // 
-            this.materialRadioButton12.AutoSize = true;
-            this.materialRadioButton12.Depth = 0;
-            this.materialRadioButton12.Location = new System.Drawing.Point(216, 96);
-            this.materialRadioButton12.Margin = new System.Windows.Forms.Padding(0);
-            this.materialRadioButton12.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialRadioButton12.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRadioButton12.Name = "materialRadioButton12";
-            this.materialRadioButton12.Ripple = true;
-            this.materialRadioButton12.Size = new System.Drawing.Size(79, 37);
-            this.materialRadioButton12.TabIndex = 77;
-            this.materialRadioButton12.TabStop = true;
-            this.materialRadioButton12.Text = "Indian";
-            this.materialRadioButton12.UseVisualStyleBackColor = true;
-            // 
-            // materialRadioButton7
-            // 
-            this.materialRadioButton7.AutoSize = true;
-            this.materialRadioButton7.Depth = 0;
-            this.materialRadioButton7.Location = new System.Drawing.Point(31, 146);
-            this.materialRadioButton7.Margin = new System.Windows.Forms.Padding(0);
-            this.materialRadioButton7.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialRadioButton7.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRadioButton7.Name = "materialRadioButton7";
-            this.materialRadioButton7.Ripple = true;
-            this.materialRadioButton7.Size = new System.Drawing.Size(95, 37);
-            this.materialRadioButton7.TabIndex = 75;
-            this.materialRadioButton7.TabStop = true;
-            this.materialRadioButton7.Text = "Mexican";
-            this.materialRadioButton7.UseVisualStyleBackColor = true;
             // 
             // materialRadioButton8
             // 
@@ -727,7 +662,6 @@
             this.Controls.Add(this.materialCheckbox2);
             this.Controls.Add(this.materialCheckbox3);
             this.Controls.Add(this.materialLabel1);
-            this.Controls.Add(this.txtRestaurantName);
             this.Controls.Add(this.txtOfferingName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -763,7 +697,6 @@
         private MaterialSkin.Controls.MaterialCheckbox materialCheckbox2;
         private MaterialSkin.Controls.MaterialCheckbox materialCheckbox3;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialTextBox2 txtRestaurantName;
         private MaterialSkin.Controls.MaterialTextBox2 txtOfferingName;
         private System.Windows.Forms.Label label2;
         private MaterialSkin.Controls.MaterialTextBox2 txtPrice;
@@ -783,8 +716,6 @@
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton6;
         private System.Windows.Forms.GroupBox gpCuisine;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton11;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton12;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton7;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton8;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton9;
         private MaterialSkin.Controls.MaterialDivider materialDivider2;

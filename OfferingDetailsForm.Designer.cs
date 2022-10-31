@@ -45,7 +45,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtETA = new MaterialSkin.Controls.MaterialTextBox();
             this.txtEWT = new MaterialSkin.Controls.MaterialTextBox();
-            this.txtServiceOptions = new MaterialSkin.Controls.MaterialTextBox();
             this.txtPrice = new MaterialSkin.Controls.MaterialTextBox();
             this.txtOffering_name = new MaterialSkin.Controls.MaterialTextBox();
             this.lblETA = new MaterialSkin.Controls.MaterialLabel();
@@ -161,7 +160,7 @@
             this.txtOfferingType.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtOfferingType.Hint = "Break Fast, Lunch or Dinner";
             this.txtOfferingType.LeadingIcon = null;
-            this.txtOfferingType.Location = new System.Drawing.Point(236, 30);
+            this.txtOfferingType.Location = new System.Drawing.Point(236, 31);
             this.txtOfferingType.MaxLength = 50;
             this.txtOfferingType.MouseState = MaterialSkin.MouseState.OUT;
             this.txtOfferingType.Multiline = false;
@@ -243,7 +242,6 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.txtETA);
             this.panel1.Controls.Add(this.txtEWT);
-            this.panel1.Controls.Add(this.txtServiceOptions);
             this.panel1.Controls.Add(this.txtPrice);
             this.panel1.Controls.Add(this.txtOffering_name);
             this.panel1.Controls.Add(this.lblETA);
@@ -295,24 +293,6 @@
             this.txtEWT.TabIndex = 63;
             this.txtEWT.Text = "";
             this.txtEWT.TrailingIcon = null;
-            // 
-            // txtServiceOptions
-            // 
-            this.txtServiceOptions.AnimateReadOnly = false;
-            this.txtServiceOptions.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtServiceOptions.Depth = 0;
-            this.txtServiceOptions.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtServiceOptions.Hint = "Service Options";
-            this.txtServiceOptions.LeadingIcon = null;
-            this.txtServiceOptions.Location = new System.Drawing.Point(405, 30);
-            this.txtServiceOptions.MaxLength = 50;
-            this.txtServiceOptions.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtServiceOptions.Multiline = false;
-            this.txtServiceOptions.Name = "txtServiceOptions";
-            this.txtServiceOptions.Size = new System.Drawing.Size(227, 50);
-            this.txtServiceOptions.TabIndex = 62;
-            this.txtServiceOptions.Text = "";
-            this.txtServiceOptions.TrailingIcon = null;
             // 
             // txtPrice
             // 
@@ -539,7 +519,7 @@
             this.txtlabelOrder.AutoSize = true;
             this.txtlabelOrder.Depth = 0;
             this.txtlabelOrder.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtlabelOrder.Location = new System.Drawing.Point(267, 639);
+            this.txtlabelOrder.Location = new System.Drawing.Point(437, 639);
             this.txtlabelOrder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtlabelOrder.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtlabelOrder.Name = "txtlabelOrder";
@@ -622,7 +602,6 @@
         private MaterialSkin.Controls.MaterialTextBox txtOfferingType;
         private MaterialSkin.Controls.MaterialTextBox txtETA;
         private MaterialSkin.Controls.MaterialTextBox txtEWT;
-        private MaterialSkin.Controls.MaterialTextBox txtServiceOptions;
         private MaterialSkin.Controls.MaterialTextBox txtPrice;
         private MaterialSkin.Controls.MaterialTextBox txtOffering_name;
         private System.Windows.Forms.ErrorProvider errorProvider1;

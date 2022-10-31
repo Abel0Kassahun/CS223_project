@@ -20,14 +20,25 @@ namespace ProjectBlue
 {
     public partial class AddOfferingForm : KryptonForm
     {
-        private byte[] image;
+        private string fullname;
+        private byte[] image = null;
         private int rid;
-        public AddOfferingForm()
+        bool visible = false;
+        bool visible2 = false;
+        public AddOfferingForm(string fullname)
         {
             InitializeComponent();
-
+            this.fullname = fullname;
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey700, Accent.Blue700, TextShade.WHITE );
+            
+            materialLabel2.Hide();
+            txtEWT.Hide();
+            label3.Hide();
+
+            materialLabel4.Hide();
+            txtETA.Hide();
+            label4.Hide();
         }
 
         private void pbClose_Click(object sender, EventArgs e)
@@ -37,32 +48,34 @@ namespace ProjectBlue
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+ 
             errorProvider1.Clear();
             if (string.IsNullOrEmpty(txtOfferingName.Text))
             {
                 MessageBox.Show("Offering name is required", "Error");
             }
+            else if (image == null)
+            {
+                MessageBox.Show("Offering image is required", "Error");
+            }
             else if (string.IsNullOrEmpty(txtPrice.Text))
             {
                 MessageBox.Show("Offering Price is required", "Error");
             }
-            else if (string.IsNullOrEmpty(txtRestaurantName.Text))
-            {
-                MessageBox.Show("Restaurant name is required", "Error");
-            }
-            else if (string.IsNullOrEmpty(txtEWT.Text))
+            else if (string.IsNullOrEmpty(txtEWT.Text) && visible)
             {
                 MessageBox.Show("Estimated waiting time is required", "Error");
             }
-            else if (string.IsNullOrEmpty(txtETA.Text))
+            else if (string.IsNullOrEmpty(txtETA.Text) && visible2)
             {
                 MessageBox.Show("Estimated time of arrival is required", "Error");
             }
+
             else
             {
                 Regex[] reg = new Regex[3];
-                reg[0] = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");//for offering and restaurant name
-                reg[1] = new Regex(@"[1-9]{1}[0-9]+$");//for price, EWT and ETA
+                reg[0] = new Regex(@"^[A-Z]{1}[a-zA-Z ]+$");//for offering and restaurant name
+                reg[1] = new Regex(@"^[0-9]+$");//for price, EWT and ETA
 
                 if (!(reg[0].IsMatch(txtOfferingName.Text)))
                 {
@@ -70,108 +83,134 @@ namespace ProjectBlue
                 }
                 else if (!(reg[1].IsMatch(txtPrice.Text)))
                 {
-                    errorProvider1.SetError(txtPrice, "Invalid Price Format!,\n Correct phone number example: \"0921314151\"");
+                    errorProvider1.SetError(txtPrice, "Invalid Price Format!");
                 }
-                else if (!(reg[0].IsMatch(txtRestaurantName.Text)))
-                {
-                    errorProvider1.SetError(txtRestaurantName, "Incorrect Restaurant Name format!,\n Correct name example: \"Burger King\"");
-                }
-                else if (reg[1].IsMatch(txtEWT.Text))
+                else if (!(reg[1].IsMatch(txtEWT.Text)) && visible)
                 {
                     errorProvider1.SetError(txtEWT, "Incorrect Estimated Waiting Time format!,\n Correct name example: \"45\"");
                 }
-                else if (reg[1].IsMatch(txtETA.Text))
+                else if (!(reg[1].IsMatch(txtETA.Text)) && visible2)
                 {
                     errorProvider1.SetError(txtETA, "Incorrect Estimated Time of Arrival format!,\n Correct name example: \"45\"");
                 }
                 else
                 {
-                    if (int.Parse(txtEWT.Text) > 59 && int.Parse(txtEWT.Text) <= 0)
+                    var item = gbMealOfTheDay.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+                    var item2 = gpCourseOfMeal.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+                    var item3 = gpCuisine.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+
+                    if (item == null)
                     {
-                        MessageBox.Show("Estimated waiting time is supposed to be between 0 and 60 min", "Error");
+                        MessageBox.Show("You must choose what type of meal the offering is ", "Error");
                     }
-                    else if (int.Parse(txtETA.Text) > 59 && int.Parse(txtETA.Text) <= 0)
+                    else if (item2 == null)
                     {
-                        MessageBox.Show("Estimated time of arrival is supposed to be between 0 and 60 min", "Error");
+                        MessageBox.Show("You must choose what course of meal the offering is ", "Error");
+                    }
+                    else if (item3 == null)
+                    {
+                        MessageBox.Show("You must choose what type of cousine the offering is ", "Error");
                     }
                     else
                     {
-                        var item = gbMealOfTheDay.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
-                        var item2 = gpCourseOfMeal.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
-                        var item3 = gpCuisine.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
-
-                        if (item == null)
+                        bool cool = true;
+                        string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        using (MySqlConnection conn = new MySqlConnection(connString))
                         {
-                            MessageBox.Show("You must choose what type of meal the offering is ", "Error");
-                        }
-                        else if (item2 == null)
-                        {
-                            MessageBox.Show("You must choose what course of meal the offering is ", "Error");
-                        }
-                        else if (item3 == null)
-                        {
-                            MessageBox.Show("You must choose what type of cousine the offering is ", "Error");
-                        }
-                        else
-                        {
-                            bool cool = true;
-                            string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-                            using (MySqlConnection conn = new MySqlConnection(connString))
+                            if (conn.State == ConnectionState.Closed)
+                                conn.Open();
+                            string query = "select offering_name, offering_image from offerings";
+                            string query1 = "select * from restaurant_manager";
+                            using (MySqlCommand cmd = new MySqlCommand(query, conn))
                             {
-                                if (conn.State == ConnectionState.Closed)
-                                    conn.Open();
-                                string query = "select `restaurant_name`, `offering_name`,`offering_image` from `restaurant`, `offerings`";
-                                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                                using (MySqlDataReader reader = cmd.ExecuteReader())
                                 {
-                                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                                    while (reader.Read())
                                     {
-                                        while (reader.Read())
+                                        if (txtOfferingName.Text == reader.GetString("offering_name"))
                                         {
-                                            if (txtOfferingName.Text == reader.GetString("offering_name"))
-                                            {
-                                                if (txtRestaurantName.Text == reader.GetString("restaurant_name"))
-                                                {
-                                                    MessageBox.Show("This offering already exists in this restaurant, Try Again", "Error");
-                                                    cool = false;
-                                                }
-                                            }
-                                            else if (image == reader[2])
-                                            {
-                                                MessageBox.Show("This image is already used on another restaurant, Try Again", "Error");
-                                                cool = false;
-                                            }
-                                            else if (cool)
-                                            {
-                                                if (txtRestaurantName.Text == reader.GetString("restaurant_name"))
-                                                {
-                                                    rid = reader.GetInt32("restaurant_id");
-                                                }
-                                            }
+                                            MessageBox.Show("This offering already exists, Try Again", "Error");
+                                            cool = false;
+                                        }
+                                        else if (image == reader[1])
+                                        {
+                                            MessageBox.Show("This image is already in use by another offering, Try Again", "Error");
+                                            cool = false;
                                         }
                                     }
                                 }
                             }
                             if (cool)
                             {
-                                Offering off = new Offering();
-                                off.restaurant_id = rid;
-                                off.Offering_image = image;
-                                off.Offering_name = txtOfferingName.Text;
-                                off.Price = int.Parse(txtPrice.Text);
-                                off.ServiceOptions = materialCheckbox1.Text + " " + materialCheckbox2.Text + " " + materialCheckbox3.Text;
-                                off.EWT = int.Parse(txtEWT.Text);
-                                off.ETA = int.Parse(txtETA.Text);
-                                var clicked = gbMealOfTheDay.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
-                                var clicked1 = gpCourseOfMeal.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
-                                var clicked2 = gpCuisine.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
-                                off.offering_type = clicked.Text;
-                                off.CourseOfMeal = clicked1.Text;
-                                off.Cuisine = clicked2.Text;
-                                off.save();
+                                using (MySqlCommand cmd = new MySqlCommand(query1, conn))
+                                {
+                                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            if (fullname == reader.GetString("full_name"))
+                                            {
+                                                rid = reader.GetInt32("rid");
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
+                        if (cool)
+                        {
+                            Offering off = new Offering();
+                            off.restaurant_id = rid;
+                            off.Offering_image = image;
+                            off.Offering_name = txtOfferingName.Text;
+                            off.Price = float.Parse(txtPrice.Text);
+
+                            var clicked = gbMealOfTheDay.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+                            var clicked1 = gpCourseOfMeal.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+                            var clicked2 = gpCuisine.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+                            off.offering_type = clicked.Text;
+                            off.CourseOfMeal = clicked1.Text;
+                            off.Cuisine = clicked2.Text;
+
+                            if (materialCheckbox1.Checked)
+                            {
+                                off.ServiceOptions = materialCheckbox1.Text;
+                            }
+                            else if (materialCheckbox2.Checked)
+                            {
+                                off.ServiceOptions += " " + materialCheckbox2.Text;
+                            }
+                            else if (materialCheckbox3.Checked)
+                            {
+                                off.ServiceOptions += " " + materialCheckbox3.Text;
+                            }
+
+                            if (visible)
+                            {
+                                off.EWT = txtEWT.Text;
+                            }
+                            else if (!visible)
+                            {
+                                off.EWT = null;
+                            }
+
+
+                            if (visible2)
+                            {
+                                off.ETA = txtETA.Text;
+                            }
+                            else if (!visible2)
+                            {
+                                off.ETA = null;
+                            }
+
+                            off.save();
+                            MessageBox.Show("A New Offering Has Been Added", "Success");
+                            this.Close();
+                            AddOfferingForm aof = new AddOfferingForm(fullname);
+                            aof.Show();            
+                        }
                     }
-                    
                 }
             }
         }
@@ -187,12 +226,48 @@ namespace ProjectBlue
                 }
             }
         }
+
         byte[] ConvertImageToBytes(Image img)
         {
             using (MemoryStream ms = new MemoryStream())
             {
                 img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                 return ms.ToArray();
+            }
+        }
+
+        private void materialCheckbox1_Click(object sender, EventArgs e)
+        {
+            if (materialCheckbox1.Checked)
+            {
+                materialLabel2.Show();
+                txtEWT.Show();
+                label3.Show();
+                visible = true;
+            }
+            else if (!(materialCheckbox1.Checked))
+            {
+                materialLabel2.Hide();
+                txtEWT.Hide();
+                label3.Hide();
+                visible = false;
+            }
+        }
+        private void materialCheckbox3_Click(object sender, EventArgs e)
+        {
+            if (materialCheckbox3.Checked)
+            {
+                materialLabel4.Show();
+                txtETA.Show();
+                label4.Show();
+                visible2 = true;
+            }
+            else if (!(materialCheckbox3.Checked))
+            {
+                materialLabel4.Hide();
+                txtETA.Hide();
+                label4.Hide();
+                visible2 = false;
             }
         }
     }

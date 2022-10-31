@@ -69,6 +69,10 @@ namespace ProjectBlue
             {
                 MessageBox.Show("Restaurant name is required", "Error");
             }
+            else if (image == null)
+            {
+                MessageBox.Show("Restaurant image is required", "Error");
+            }
             else if (string.IsNullOrEmpty(txtAddress.Text))
             {
                 MessageBox.Show("Restaurant Address is required", "Error");
@@ -127,21 +131,11 @@ namespace ProjectBlue
                                         cool = false;
                                     }
                                 }
-                                if (cool)
-                                {
-                                    while (reader.Read())
-                                    {
-                                        if(txtRestaurantName.Text == reader.GetString("restaurant_name"))
-                                        {
-                                            rid = reader.GetInt32("restaurant_id");
-                                        }
-                                    }
-                                }
                             }                            
-                        }
+                        }   
                     }
                     if (cool)
-                    { 
+                    {
                         Restaurant res = new Restaurant();
                         res.Restaurant_Name = txtRestaurantName.Text;
                         res.Restaurant_Image = image;
@@ -152,19 +146,47 @@ namespace ProjectBlue
                         res.WorkingHours = txtOpeningTime.Text + " - " + txtClosingTime.Text;
                         res.Address_OnMap = txtAddressOnMap.Text;
                         res.save();
-                        string path = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-                        using (MySqlConnection conn = new MySqlConnection(path))
+
+                        string connString1 = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        using (MySqlConnection conn = new MySqlConnection(connString1))
+                        {
+                            if (conn.State == ConnectionState.Closed)
+                                conn.Open();
+
+                            string query = "select restaurant_id, restaurant_name from restaurant";
+
+                            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                            {
+                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        if (reader.GetString("restaurant_name") == txtRestaurantName.Text)
+                                        {
+                                            rid = reader.GetInt32("restaurant_id");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        using (MySqlConnection conn = new MySqlConnection(connString1))
                         {
                             if (conn.State == ConnectionState.Closed)
                                 conn.Open();
                             string query = "insert into restaurant_manager values(@full_name, @rid)";
                             using (MySqlCommand cmd = new MySqlCommand(query, conn))
                             {
-                                cmd.Parameters.AddWithValue("@rid", rid);
                                 cmd.Parameters.AddWithValue("@full_name", fullname);
+                                cmd.Parameters.AddWithValue("@rid", rid);
+
+                                cmd.ExecuteNonQuery();
                             }
                         }
-                        this.Close();
+
+                        
+                        Close();
+                        ManagerMainForm mmf = new ManagerMainForm(fullname);
+                        mmf.Show();
                     }
                 }
             }

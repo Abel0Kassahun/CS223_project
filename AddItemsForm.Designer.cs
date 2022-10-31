@@ -49,12 +49,12 @@
             this.cardAddOffering.Controls.Add(this.pictureBox2);
             this.cardAddOffering.Depth = 0;
             this.cardAddOffering.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardAddOffering.Location = new System.Drawing.Point(85, 288);
-            this.cardAddOffering.Margin = new System.Windows.Forms.Padding(14);
+            this.cardAddOffering.Location = new System.Drawing.Point(65, 151);
+            this.cardAddOffering.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.cardAddOffering.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardAddOffering.Name = "cardAddOffering";
-            this.cardAddOffering.Padding = new System.Windows.Forms.Padding(14);
-            this.cardAddOffering.Size = new System.Drawing.Size(440, 150);
+            this.cardAddOffering.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.cardAddOffering.Size = new System.Drawing.Size(587, 185);
             this.cardAddOffering.TabIndex = 4;
             this.cardAddOffering.Click += new System.EventHandler(this.cardAddOffering_Click);
             // 
@@ -64,7 +64,8 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel2.Location = new System.Drawing.Point(28, 63);
+            this.materialLabel2.Location = new System.Drawing.Point(37, 78);
+            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(114, 24);
@@ -74,9 +75,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(245, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(327, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(192, 144);
+            this.pictureBox2.Size = new System.Drawing.Size(256, 177);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -88,12 +90,12 @@
             this.cardAddRestaurant.Controls.Add(this.pictureBox1);
             this.cardAddRestaurant.Depth = 0;
             this.cardAddRestaurant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cardAddRestaurant.Location = new System.Drawing.Point(85, 110);
-            this.cardAddRestaurant.Margin = new System.Windows.Forms.Padding(14);
+            this.cardAddRestaurant.Location = new System.Drawing.Point(744, 151);
+            this.cardAddRestaurant.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.cardAddRestaurant.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardAddRestaurant.Name = "cardAddRestaurant";
-            this.cardAddRestaurant.Padding = new System.Windows.Forms.Padding(14);
-            this.cardAddRestaurant.Size = new System.Drawing.Size(440, 150);
+            this.cardAddRestaurant.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.cardAddRestaurant.Size = new System.Drawing.Size(587, 185);
             this.cardAddRestaurant.TabIndex = 3;
             this.cardAddRestaurant.Click += new System.EventHandler(this.cardAddRestaurant_Click);
             // 
@@ -103,7 +105,8 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel1.Location = new System.Drawing.Point(28, 63);
+            this.materialLabel1.Location = new System.Drawing.Point(37, 78);
+            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(139, 24);
@@ -113,9 +116,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(245, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(327, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(192, 144);
+            this.pictureBox1.Size = new System.Drawing.Size(256, 177);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -123,22 +127,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Poppins Medium", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 30);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(27, 37);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 42);
+            this.label1.Size = new System.Drawing.Size(226, 36);
             this.label1.TabIndex = 6;
             this.label1.Text = "Add Information";
             // 
             // AddItemsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 667);
+            this.ClientSize = new System.Drawing.Size(1440, 821);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cardAddOffering);
             this.Controls.Add(this.cardAddRestaurant);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AddItemsForm";
             this.Text = "AddItemsForm";
             this.cardAddOffering.ResumeLayout(false);

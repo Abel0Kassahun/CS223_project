@@ -12,12 +12,14 @@ namespace ProjectBlue.Model_Classes
 {
     public class User
     {
+        //new
         static List<User> user = new List<User>();
         public string AccountType { get; set; }
         public string FullName { get; set; }
-        public string Username { get; set; } // should uniquely identify a user
+        public string Username { get; set; } 
         public string Email { get; set; }
         public string Password { get; set; }
+
 
         public void save()
         {

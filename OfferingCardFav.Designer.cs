@@ -49,7 +49,7 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(405, 86);
+            this.materialCard1.Size = new System.Drawing.Size(375, 86);
             this.materialCard1.TabIndex = 1;
             // 
             // lblOfferingPrice
@@ -90,6 +90,7 @@
             // OfferingCardFav
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.LightBlue;
             this.Controls.Add(this.materialCard1);
             this.Name = "OfferingCardFav";
             this.Size = new System.Drawing.Size(410, 91);

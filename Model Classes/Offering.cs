@@ -15,10 +15,10 @@ namespace ProjectBlue.Model_Classes
         public int restaurant_id { get; set; }
         public byte[] Offering_image { get; set; }
         public string Offering_name { get; set; }
-        public decimal Price { get; set; }
+        public float Price { get; set; }
         public string ServiceOptions { get; set; }
-        public int EWT { get; set; } // EWT - Estimated Waiting Time (dine-in & takeaway)
-        public int ETA { get; set; } // ETA - Estimated Time of Arrival (delivery)
+        public string EWT { get; set; } // EWT - Estimated Waiting Time (dine-in & takeaway)
+        public string ETA { get; set; } // ETA - Estimated Time of Arrival (delivery)
         public string offering_type { get; set; }
         public string CourseOfMeal { get; set; }
         public string Cuisine { get; set; }

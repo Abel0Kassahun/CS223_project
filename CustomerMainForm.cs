@@ -30,6 +30,8 @@ namespace ProjectBlue
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue700, TextShade.WHITE);
             materialLabel9.Hide();
+            materialTextBox22.Text = "" + materialSlider1.Value;
+            materialButtonRefresh.Hide();
             /*
             flpAppetizers.Controls.Clear();
             flpChineseCuisine.Controls.Clear();
@@ -100,10 +102,10 @@ namespace ProjectBlue
                                 LoadMediumCard(reader, medium_card3);
                                 flpChineseCuisine.Controls.Add(medium_card3);
                             }
-                            if (reader.GetString("course_of_meal") == "Entree")
+                            if (reader.GetString("course_of_meal") == "Entrée")
                             {
                                 OfferingCardMedium medium_card4 = new OfferingCardMedium();
-                                LoadMediumCard(reader, medium_card4);                          
+                                LoadMediumCard(reader, medium_card4);
                                 flpEntrees.Controls.Add(medium_card4);
                             }
                             if (reader.GetString("course_of_meal") == "Dessert")
@@ -121,7 +123,7 @@ namespace ProjectBlue
                         }
                     }
                 }
-                using (MySqlCommand cmd = new MySqlCommand(query1, conn))
+                using (MySqlCommand cmd = new MySqlCommand(query1, conn))//this loades favourites in the favourites tab page
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -158,9 +160,12 @@ namespace ProjectBlue
                     {
                         while (reader.Read())
                         {
-                            lblFullName.Text = reader.GetString("full_name");
-                            lblUsername.Text = reader.GetString("username");
-                            lblEmailAddress.Text = reader.GetString("email");
+                            if (fullname == reader.GetString("full_name"))
+                            {
+                                lblFullName.Text = reader.GetString("full_name");
+                                lblUsername.Text = reader.GetString("username");
+                                lblEmailAddress.Text = reader.GetString("email");
+                            }
                         }
                     }
                 }
@@ -185,23 +190,23 @@ namespace ProjectBlue
         private void offeringCardMedium_Click(object sender, EventArgs e)
         {
             OfferingCardMedium ofcm = (OfferingCardMedium)sender;
-            OfferingDetailsForm odf = new OfferingDetailsForm(ofcm, fullname);
-            this.Hide();
+            OfferingDetailsForm odf = new OfferingDetailsForm(ofcm, fullname, new CustomerMainForm(fullname));
             odf.Show();
+            Hide();
         }
         private void offeringCardFav_Click(object sender, EventArgs e)
         {
             OfferingCardFav ofav = (OfferingCardFav)sender;
-            OfferingDetailsForm odf = new OfferingDetailsForm(ofav, fullname);
-            this.Hide();
+            OfferingDetailsForm odf = new OfferingDetailsForm(ofav, fullname, new CustomerMainForm(fullname));
             odf.Show();
+            Hide();
         }
         private void offeringCardLarge_Click(object sender, EventArgs e)
         {
             OfferingCardLarge ofcl = (OfferingCardLarge)sender;
-            OfferingDetailsForm odf = new OfferingDetailsForm(ofcl, fullname);
-            this.Hide();
+            OfferingDetailsForm odf = new OfferingDetailsForm(ofcl, fullname, new CustomerMainForm(fullname));
             odf.Show();
+            Hide();
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -216,21 +221,25 @@ namespace ProjectBlue
             flpSearchResults.Controls.Clear();
             if (e.KeyCode == Keys.Enter)
             {
+                materialLabel9.Hide();
                 errorProvider1.Clear();
+
                 if (string.IsNullOrEmpty(materialTextBox21.Text))
                 {
                     MessageBox.Show("You haven't Entered an Offering Name to be Searched, Try Again", "Error");
                 }
                 else
                 {
-                    Regex reg = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");
+                    Regex reg = new Regex(@"^[A-Z]{1}[a-zA-Z ]+$");
                     if (!(reg.IsMatch(materialTextBox21.Text)))
                     {
                         errorProvider1.SetError(materialTextBox21, "Incorrect Offering Name format!,\n Correct full name example: \"Happy Meal\"");
                     }
                     else
                     {
+                        bool notFound = true;
                         var item = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+
                         string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
                         using (MySqlConnection conn = new MySqlConnection(connString))
                         {
@@ -243,116 +252,143 @@ namespace ProjectBlue
                                 {
                                     while (reader.Read())
                                     {
-                                        if(materialTextBox21.Text == reader.GetString("offering_name"))
+                                        if (materialTextBox21.Text == reader.GetString("offering_name"))
                                         {
-                                            OfferingCardSmall ofcs = new OfferingCardSmall();
-                                            ofcs.OfferingName = reader.GetString("offering_name");
-                                            offering_name = reader.GetString("offering_name");
-                                            ofcs.OfferingPrice = reader.GetInt32("price");
-                                            ofcs.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                            flpSearchResults.Controls.Add(ofcs);
-                                            ofcs.Click += new EventHandler(offeringCardSmall_Click);
-                                        }
-                                        if (item.Text == reader.GetString("offering_type"))
-                                        {
-                                            if(offering_name != reader.GetString("offering_name"))
+                                            notFound = false;
+                                            if (item != null)
                                             {
-                                                OfferingCardSmall ofcs1 = new OfferingCardSmall();
-                                                offering_name = reader.GetString("offering_name");
-                                                ofcs1.OfferingName = reader.GetString("offering_name");
-                                                ofcs1.OfferingPrice = reader.GetInt32("price");
-                                                ofcs1.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-                                                flpSearchResults.Controls.Add(ofcs1);
-                                                ofcs1.Click += new EventHandler(offeringCardSmall_Click);
+                                                if (item.Text == reader.GetString("offering_type"))
+                                                {
+                                                    if (materialTextBox22.Text == reader.GetString("price"))
+                                                    {
+                                                        save(reader);
+                                                    }
+                                                    else
+                                                    {
+                                                        save(reader);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    save(reader);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (materialTextBox22.Text == reader.GetString("price"))
+                                                {
+                                                    save(reader);
+                                                }
+                                                else
+                                                {
+                                                    save(reader);
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        if (notFound)
+                        {
+                            materialLabel9.Show();
+                            materialLabel9.ForeColor = System.Drawing.Color.Red;
+                            materialLabel9.Text = "Search result not found";
+                        }
                     }
                 }
             }
         }
+        
+        private void save(MySqlDataReader reader)
+        {
+            OfferingCardSmall ofcs = new OfferingCardSmall();
+            ofcs.OfferingName = reader.GetString("offering_name");
+            offering_name = reader.GetString("offering_name");
+            ofcs.OfferingPrice = reader.GetInt32("price");
+            ofcs.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
+            flpSearchResults.Controls.Add(ofcs);
+            ofcs.Click += new EventHandler(offeringCardSmall_Click);
+        }
+        
         private void offeringCardSmall_Click(object sender, EventArgs e)
         {
             OfferingCardSmall ofcs = (OfferingCardSmall)sender;
-            OfferingDetailsForm odf = new OfferingDetailsForm(ofcs, fullname);
-            this.Hide();
+            OfferingDetailsForm odf = new OfferingDetailsForm(ofcs, fullname, new CustomerMainForm(fullname));
             odf.Show();
+            Hide();
+        }
+        private void materialSlider1_onValueChanged(object sender, int newValue)
+        {
+            materialTextBox22.Text = ""+materialSlider1.Value;
         }
 
-        /*
-*                  if (reader.GetString("offering_type") == toBeServed)
-{
-OfferingCardMedium medium_card = new OfferingCardMedium();
-medium_card.OfferingName = reader.GetString("offering_name");
-medium_card.OfferingPrice = reader.GetInt32("price");
-medium_card.OfferingType = reader.GetString("offering_type");
-medium_card.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpMealOfTheDay.Controls.Add(medium_card);
-medium_card.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-if (reader.GetString("cuisine") == "Ethiopian")
-{
-OfferingCardMedium medium_card1 = new OfferingCardMedium();
-medium_card1.OfferingName = reader.GetString("offering_name");
-medium_card1.OfferingPrice = reader.GetInt32("price");
-medium_card1.OfferingType = reader.GetString("offering_type");
-medium_card1.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpEthiopianCuisine.Controls.Add(medium_card1);
-medium_card1.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-if (reader.GetString("cuisine") == "American")
-{
-OfferingCardMedium medium_card2 = new OfferingCardMedium();
-medium_card2.OfferingName = reader.GetString("offering_name");
-medium_card2.OfferingPrice = reader.GetInt32("price");
-medium_card2.OfferingType = reader.GetString("offering_type");
-medium_card2.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpAmericanCuisine.Controls.Add(medium_card2);
-medium_card2.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-if (reader.GetString("cuisine") == "Chinese")
-{
-OfferingCardMedium medium_card3 = new OfferingCardMedium();
-medium_card3.OfferingName = reader.GetString("offering_name");
-medium_card3.OfferingPrice = reader.GetInt32("price");
-medium_card3.OfferingType = reader.GetString("offering_type");
-medium_card3.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpChineseCuisine.Controls.Add(medium_card3);
-medium_card3.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-if (reader.GetString("course_of_meal") == "Entree")
-{
-OfferingCardMedium medium_card4 = new OfferingCardMedium();
-medium_card4.OfferingName = reader.GetString("offering_name");
-medium_card4.OfferingPrice = reader.GetInt32("price");
-medium_card4.OfferingType = reader.GetString("offering_type");
-medium_card4.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpEntrees.Controls.Add(medium_card4);
-medium_card4.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-if (reader.GetString("course_of_meal") == "Dessert")
-{
-OfferingCardMedium medium_card5 = new OfferingCardMedium();
-medium_card5.OfferingName = reader.GetString("offering_name");
-medium_card5.OfferingPrice = reader.GetInt32("price");
-medium_card5.OfferingType = reader.GetString("offering_type");
-medium_card5.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpDesserts.Controls.Add(medium_card5);
-medium_card5.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-if (reader.GetString("course_of_meal") == "Appetizer")
-{
-OfferingCardMedium medium_card6 = new OfferingCardMedium();
-medium_card6.OfferingName = reader.GetString("offering_name");
-medium_card6.OfferingPrice = reader.GetInt32("price");
-medium_card6.OfferingType = reader.GetString("offering_type");
-medium_card6.OfferingImage = ConvertByteArrToImage((byte[])reader[3]);
-flpAppetizers.Controls.Add(medium_card6);
-medium_card6.Click += new EventHandler(offeringCardMedium_Click);//every loaded offerings are subscribed here
-}
-* */
+        private void searchbyFilterOnly_Click(object sender, EventArgs e)
+        {
+            flpSearchResults.Controls.Clear();
+
+            if (searchbyFilterOnly.Text == "Back")
+            {
+                materialButtonRefresh.Hide();
+                searchbyFilterOnly.Text = "Search by filter only";
+                materialTextBox21.Show();
+            }
+            else
+            {
+                materialButtonRefresh.Show();
+                searchbyFilterOnly.Text = "Back";
+
+                materialTextBox21.Hide();
+            }
+        }
+
+        private void materialButtonRefresh_Click(object sender, EventArgs e)
+        {
+            flpSearchResults.Controls.Clear();
+
+            var item = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked == true);
+            string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+                string query = "select * from offerings";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (item != null)
+                            {
+                                if (item.Text == reader.GetString("offering_type"))
+                                {
+                                    if (materialTextBox22.Text == reader.GetString("price"))
+                                    {
+                                        save(reader);
+                                    }
+                                    else
+                                    {
+                                        save(reader);
+                                    }
+                                }
+                            }
+                            if (materialTextBox22.Text == reader.GetString("price"))
+                            {
+                                save(reader);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void materialTextBox22_KeyDown(object sender, KeyEventArgs e)// Whenever we enter a price value in the price textbox, we wold also want the price slider to change accordingly 
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                materialSlider1.Value = int.Parse(materialTextBox22.Text);
+            }
+        }
     }
 }

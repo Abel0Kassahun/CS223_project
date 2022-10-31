@@ -33,7 +33,7 @@ namespace ProjectBlue
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 string query = "select * from `user_info`";
-                string query1 = "select * from `retaurant_manager`, `restaurant`";
+                string query1 = "select * from `restaurant_manager`, `restaurant`";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -65,13 +65,13 @@ namespace ProjectBlue
                         }
                     }
                 }
-
             }
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            mmf.Close();
+            mmf.Hide();
+            Hide();
             LoginForm login = new LoginForm();
             login.Show();
         }

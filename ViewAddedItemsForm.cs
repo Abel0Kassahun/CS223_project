@@ -16,9 +16,6 @@ using MySql.Data.MySqlClient;
 using ProjectBlue.Model_Classes;
 
 
-// Reminder to add an edit option on the offerings(cousines) and make them editable and the editing form that pops when the edit option is selected is the infamous OfferingDetailsForm.cs
-// Reminder to completely change the database
-// Reminder to add a couple of conditions to whatever the user (in this case the restaurant manager) inputs when trying to edit previous information about the restaurant or the offerings they offer 
 
 namespace ProjectBlue
 {
@@ -33,10 +30,8 @@ namespace ProjectBlue
             InitializeComponent();
             this.fullname = fullname;
 
-            materialTextBox1.Hide();
-            materialTextBox2.Hide();
+            txtboxlocation.Hide();
             materialTextBox3.Hide();
-            materialTextBox5.Hide();
             materialTextBox4.Hide();
             materialTextBox6.Hide();
 
@@ -56,7 +51,7 @@ namespace ProjectBlue
             {
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
-                string query1 = " select * from restaurant, restaurant_manager";
+                string query1 = " select * from restaurant, restaurant_manager where rid = restaurant_id";
                 string query2 = "select * from offerings";
                 using (MySqlCommand com = new MySqlCommand(query1, conn))
                 {
@@ -127,34 +122,24 @@ namespace ProjectBlue
             pictureBox7.Hide();
 
 
-            materialTextBox1.Show();
-            materialTextBox2.Show();
+            txtboxlocation.Show();
             materialTextBox3.Show();
-            materialTextBox5.Show();
             materialTextBox4.Show();
             materialTextBox6.Show();
 
             materialLabel4.Show();
             materialLabel5.Show();
 
-            materialTextBox1.Text = materialLabel16.Text;
-            materialTextBox2.Text = materialLabel17.Text;
+            txtboxlocation.Text = materialLabel17.Text;
             materialTextBox3.Text = materialLabel18.Text;
-            materialTextBox5.Text = materialLabel21.Text;
             materialTextBox4.Text = materialLabel20.Text;
         }
 
         private void materialLabel4_Click(object sender, EventArgs e)//this method is for when the "Save" label is clicked
-        {
-            //Reminder to put a code to check whatever the user inputs is valid or not use regex and error providers ----------------done
-            //The code below is supposed to be in a final else when the rest of the conditions is verified           ----------------done
-            
+        {           
             errorProvider1.Clear();
-            if (string.IsNullOrEmpty(materialTextBox1.Text))
-            {
-                MessageBox.Show("Restaurant name is required", "Error");
-            }
-            else if (string.IsNullOrEmpty(materialTextBox2.Text))
+
+            if (string.IsNullOrEmpty(txtboxlocation.Text))
             {
                 MessageBox.Show("Restaurant Address is required", "Error");
             }
@@ -162,26 +147,27 @@ namespace ProjectBlue
             {
                 MessageBox.Show("Phone Number is required", "Error");
             }
+            else if (string.IsNullOrEmpty(materialTextBox6.Text))
+            {
+                MessageBox.Show("Restaurant Address on map is required", "Error");
+            }
             else
             {
                 Regex[] reg = new Regex[3];
-                reg[0] = new Regex(@"^[A-Z]{1}[a-z]+[ ]{1}[A-Z]{1}[a-z]+$");//for restaurant name 
-                reg[1] = new Regex("[0]{1}[9]{1}[0-9]{8}");//for phone number
-                reg[2] = new Regex(@"[A-Z]{1}$");//for address
+                reg[0] = new Regex(@"^[0]{1}[9]{1}[0-9]{8}");//for phone number
+                reg[1] = new Regex(@"^[a-zA-z]+$");//for address
 
 
-                if (!(reg[0].IsMatch(materialTextBox1.Text)))
-                {
-                    errorProvider1.SetError(materialTextBox1, "Incorrect Name format!,\n Correct full name example: \"Los pollos hermanos\"");
-                }
-                else if (!(reg[1].IsMatch(materialTextBox3.Text)))
+                if (!(reg[0].IsMatch(materialTextBox3.Text)))
                 {
                     errorProvider1.SetError(materialTextBox3, "Invalid phone number format!,\n Correct phone number example: \"0921314151\"");
                 }
-                else if (!(reg[2].IsMatch(materialTextBox2.Text)))
+                /*
+                else if (!(reg[1].IsMatch(txtboxlocation.Text)))
                 {
-                    errorProvider1.SetError(materialTextBox2, "First letter should be an alphabet");
+                    errorProvider1.SetError(txtboxlocation, "First letter should be an alphabet");
                 }
+                */
                 else
                 {
                     bool cool = true;
@@ -192,21 +178,15 @@ namespace ProjectBlue
                     {
                         if (conn.State == ConnectionState.Closed)
                             conn.Open();
-                        string query = "select `restaurant_name`, `phone_number` from `restaurant`";
+                        string query = "select restaurant_name, phone_number from restaurant";
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
                                 {
-                                    restaurant_name = reader.GetString("restaurant_name");
                                     phone_number = reader.GetString("phone_number");
-                                    if (materialTextBox1.Text == restaurant_name)
-                                    {
-                                        MessageBox.Show("Restaurant name already exists, Try Again", "Error");
-                                        cool = false;
-                                    }
-                                    else if (materialTextBox3.Text == phone_number)
+                                    if (materialTextBox3.Text == phone_number)
                                     {
                                         MessageBox.Show("Phone number is already used on another restaurant, Try Again", "Error");
                                         cool = false;
@@ -220,46 +200,57 @@ namespace ProjectBlue
                         materialLabel4.Hide();
                         materialLabel5.Hide();
 
-                        Restaurant res = new Restaurant();
-                        res.Restaurant_Name = materialTextBox1.Text;
-                        res.Address = materialTextBox2.Text;
-                        res.Address_OnMap = materialTextBox6.Text;
-                        res.PhoneNumber = materialTextBox3.Text;
-                        res.ServiceOptions = materialTextBox5.Text;
-                        res.WorkingHours = materialTextBox4.Text;
-                        res.Address_OnMap = materialTextBox6.Text;
-                        res.save();
+                        string query = "update restaurant\n" +
+                                       "set address = @address, address_on_map = @link, phone_number = @phone_number, " +
+                                       "opening_and_closing_time = @opening_and_closing_time \n" +
+                                       "where restaurant_id = @id";
+                        string path = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+                        using (MySqlConnection con = new MySqlConnection(path))
+                        {
+                            if (con.State == ConnectionState.Closed)
+                                con.Open();
+                            using (MySqlCommand comm = new MySqlCommand(query, con))
+                            {
+                                comm.Parameters.AddWithValue("@address",txtboxlocation.Text);
+                                comm.Parameters.AddWithValue("@link",materialTextBox6.Text);
+                                comm.Parameters.AddWithValue("@phone_number",materialTextBox3.Text);
+                                comm.Parameters.AddWithValue("@id",id);
+                                comm.Parameters.AddWithValue("@opening_and_closing_time", materialTextBox4.Text);
 
-                        materialLabel16.Text = materialTextBox1.Text;
-                        materialLabel17.Text = materialTextBox2.Text;
+                                comm.ExecuteNonQuery();
+                            }
+                        }
+
+
+                        materialLabel17.Text = txtboxlocation.Text;
                         materialLabel18.Text = materialTextBox3.Text;
-                        materialLabel21.Text = materialTextBox5.Text;
                         materialLabel20.Text = materialTextBox4.Text;
                         link = materialTextBox6.Text;
+                        materialLabel2.Text = txtboxlocation.Text;
+                        materialLabel1.Text = materialTextBox3.Text;
+                        //this.Refresh();
+
+                        txtboxlocation.Hide();
+                        materialTextBox3.Hide();
+                        materialTextBox4.Hide();
+                        materialTextBox6.Hide();
+
+                        materialLabel16.Show();
+                        materialLabel17.Show();
+                        materialLabel18.Show();
+                        materialLabel21.Show();
+                        materialLabel20.Show();
+                        materialLabel6.Show();
+
+                        materialLabel4.Hide();
+                        materialLabel5.Hide();
+                        pictureBox7.Show();
                     }
-
                 }
-                materialTextBox1.Hide();
-                materialTextBox2.Hide();
-                materialTextBox3.Hide();
-                materialTextBox5.Hide();
-                materialTextBox4.Hide();
-                materialTextBox6.Hide();
-
-                materialLabel16.Show();
-                materialLabel17.Show();
-                materialLabel18.Show();
-                materialLabel21.Show();
-                materialLabel20.Show();
-                materialLabel6.Show();
-
-                materialLabel4.Hide();
-                materialLabel5.Hide();
-                pictureBox7.Show();
             }
         }
 
-        private void materialLabel5_Click_1(object sender, EventArgs e)
+        private void materialLabel5_Click_1(object sender, EventArgs e)//this event is for when the cancel button is clicked
         {
             materialLabel16.Show();
             materialLabel17.Show();
@@ -268,10 +259,8 @@ namespace ProjectBlue
             materialLabel20.Show();
             materialLabel6.Show();
 
-            materialTextBox1.Hide();
-            materialTextBox2.Hide();
+            txtboxlocation.Hide();
             materialTextBox3.Hide();
-            materialTextBox5.Hide();
             materialTextBox4.Hide();
             materialTextBox6.Hide();
 
@@ -288,7 +277,6 @@ namespace ProjectBlue
         {
             OfferingCardLarge ofcm = (OfferingCardLarge)sender;
             OfferingDetailsForm odf = new OfferingDetailsForm(ofcm, this);
-            this.Hide();
             odf.Show();
         }
     }

@@ -51,7 +51,7 @@
             this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard5.Name = "materialCard5";
             this.materialCard5.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard5.Size = new System.Drawing.Size(215, 320);
+            this.materialCard5.Size = new System.Drawing.Size(217, 291);
             this.materialCard5.TabIndex = 1;
             // 
             // lblOfferingType
@@ -60,7 +60,7 @@
             this.lblOfferingType.Depth = 0;
             this.lblOfferingType.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblOfferingType.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblOfferingType.Location = new System.Drawing.Point(17, 287);
+            this.lblOfferingType.Location = new System.Drawing.Point(17, 264);
             this.lblOfferingType.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblOfferingType.Name = "lblOfferingType";
             this.lblOfferingType.Size = new System.Drawing.Size(98, 19);
@@ -73,7 +73,7 @@
             this.lblRestaurantName.Depth = 0;
             this.lblRestaurantName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblRestaurantName.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblRestaurantName.Location = new System.Drawing.Point(17, 258);
+            this.lblRestaurantName.Location = new System.Drawing.Point(17, 227);
             this.lblRestaurantName.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblRestaurantName.Name = "lblRestaurantName";
             this.lblRestaurantName.Size = new System.Drawing.Size(124, 19);
@@ -86,7 +86,7 @@
             this.lblOfferingName.Depth = 0;
             this.lblOfferingName.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.lblOfferingName.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.lblOfferingName.Location = new System.Drawing.Point(17, 222);
+            this.lblOfferingName.Location = new System.Drawing.Point(17, 187);
             this.lblOfferingName.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblOfferingName.Name = "lblOfferingName";
             this.lblOfferingName.Size = new System.Drawing.Size(132, 24);
@@ -98,7 +98,7 @@
             this.pbOfferingImage.BackColor = System.Drawing.Color.Silver;
             this.pbOfferingImage.Location = new System.Drawing.Point(5, 5);
             this.pbOfferingImage.Name = "pbOfferingImage";
-            this.pbOfferingImage.Size = new System.Drawing.Size(205, 205);
+            this.pbOfferingImage.Size = new System.Drawing.Size(209, 179);
             this.pbOfferingImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbOfferingImage.TabIndex = 0;
             this.pbOfferingImage.TabStop = false;
@@ -106,6 +106,7 @@
             // OfferingCardLarge
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.LightBlue;
             this.Controls.Add(this.materialCard5);
             this.MaximumSize = new System.Drawing.Size(220, 325);
             this.MinimumSize = new System.Drawing.Size(220, 325);

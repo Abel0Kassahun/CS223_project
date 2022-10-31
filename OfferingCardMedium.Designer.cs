@@ -46,14 +46,14 @@
             this.materialCard1.Controls.Add(this.pbOfferingImage);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(3, 2);
+            this.materialCard1.Location = new System.Drawing.Point(0, 0);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
             this.materialCard1.MaximumSize = new System.Drawing.Size(375, 150);
-            this.materialCard1.MinimumSize = new System.Drawing.Size(375, 150);
+            this.materialCard1.MinimumSize = new System.Drawing.Size(350, 150);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(375, 150);
+            this.materialCard1.Size = new System.Drawing.Size(350, 150);
             this.materialCard1.TabIndex = 0;
             // 
             // lblOfferingType
@@ -106,6 +106,7 @@
             // OfferingCardMedium
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.LightBlue;
             this.Controls.Add(this.materialCard1);
             this.MaximumSize = new System.Drawing.Size(380, 155);
             this.MinimumSize = new System.Drawing.Size(380, 155);

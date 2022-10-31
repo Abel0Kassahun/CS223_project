@@ -24,6 +24,7 @@ namespace ProjectBlue.Model_Classes
         {
             string query = "insert into restaurant(address,address_on_map,restaurant_name,restaurant_image,phone_number,opening_and_closing_time,service_options) " +
                            "values(@address,@address_on_map,@restaurant_name,@restaurant_image,@phone_number,@opening_and_closing_time,@service_options)";
+
             string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
             using (MySqlConnection con = new MySqlConnection(connString))
             {

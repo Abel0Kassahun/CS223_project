@@ -44,11 +44,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.materialTextBox4 = new MaterialSkin.Controls.MaterialTextBox();
-            this.materialTextBox5 = new MaterialSkin.Controls.MaterialTextBox();
-            this.materialTextBox2 = new MaterialSkin.Controls.MaterialTextBox();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTextBox3 = new MaterialSkin.Controls.MaterialTextBox();
-            this.materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -63,6 +60,7 @@
             this.materialLabel16 = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtboxlocation = new MaterialSkin.Controls.MaterialTextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.materialCard1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -101,7 +99,7 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
-            this.materialCard1.Size = new System.Drawing.Size(549, 209);
+            this.materialCard1.Size = new System.Drawing.Size(593, 209);
             this.materialCard1.TabIndex = 0;
             // 
             // materialLabel1
@@ -110,7 +108,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.materialLabel1.Location = new System.Drawing.Point(257, 143);
+            this.materialLabel1.Location = new System.Drawing.Point(249, 143);
             this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
@@ -135,7 +133,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.materialLabel2.Location = new System.Drawing.Point(257, 89);
+            this.materialLabel2.Location = new System.Drawing.Point(249, 91);
             this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
@@ -149,7 +147,7 @@
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel3.Location = new System.Drawing.Point(257, 28);
+            this.materialLabel3.Location = new System.Drawing.Point(249, 35);
             this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
@@ -165,7 +163,7 @@
             this.materialTextBox6.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox6.Hint = "Location on Map";
             this.materialTextBox6.LeadingIcon = null;
-            this.materialTextBox6.Location = new System.Drawing.Point(75, 165);
+            this.materialTextBox6.Location = new System.Drawing.Point(54, 169);
             this.materialTextBox6.MaxLength = 19;
             this.materialTextBox6.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox6.Multiline = false;
@@ -246,13 +244,11 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.pictureBox8);
+            this.panel2.Controls.Add(this.txtboxlocation);
+            this.panel2.Controls.Add(this.materialTextBox3);
             this.panel2.Controls.Add(this.materialTextBox4);
-            this.panel2.Controls.Add(this.materialTextBox5);
-            this.panel2.Controls.Add(this.materialTextBox2);
             this.panel2.Controls.Add(this.materialTextBox6);
             this.panel2.Controls.Add(this.materialLabel6);
-            this.panel2.Controls.Add(this.materialTextBox3);
-            this.panel2.Controls.Add(this.materialTextBox1);
             this.panel2.Controls.Add(this.pictureBox7);
             this.panel2.Controls.Add(this.pictureBox6);
             this.panel2.Controls.Add(this.pictureBox5);
@@ -275,7 +271,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = global::ProjectBlue.Properties.Resources.round_place_black_24dp;
-            this.pictureBox8.Location = new System.Drawing.Point(36, 176);
+            this.pictureBox8.Location = new System.Drawing.Point(15, 176);
             this.pictureBox8.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(32, 30);
@@ -291,7 +287,7 @@
             this.materialTextBox4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox4.Hint = "Opening and Closing Hours";
             this.materialTextBox4.LeadingIcon = null;
-            this.materialTextBox4.Location = new System.Drawing.Point(458, 165);
+            this.materialTextBox4.Location = new System.Drawing.Point(424, 169);
             this.materialTextBox4.MaxLength = 19;
             this.materialTextBox4.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox4.Multiline = false;
@@ -301,48 +297,12 @@
             this.materialTextBox4.Text = "";
             this.materialTextBox4.TrailingIcon = null;
             // 
-            // materialTextBox5
-            // 
-            this.materialTextBox5.AnimateReadOnly = false;
-            this.materialTextBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialTextBox5.Depth = 0;
-            this.materialTextBox5.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox5.Hint = "Services";
-            this.materialTextBox5.LeadingIcon = null;
-            this.materialTextBox5.Location = new System.Drawing.Point(454, 98);
-            this.materialTextBox5.MaxLength = 19;
-            this.materialTextBox5.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox5.Multiline = false;
-            this.materialTextBox5.Name = "materialTextBox5";
-            this.materialTextBox5.Size = new System.Drawing.Size(255, 50);
-            this.materialTextBox5.TabIndex = 53;
-            this.materialTextBox5.Text = "";
-            this.materialTextBox5.TrailingIcon = null;
-            // 
-            // materialTextBox2
-            // 
-            this.materialTextBox2.AnimateReadOnly = false;
-            this.materialTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialTextBox2.Depth = 0;
-            this.materialTextBox2.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox2.Hint = "Location";
-            this.materialTextBox2.LeadingIcon = null;
-            this.materialTextBox2.Location = new System.Drawing.Point(75, 98);
-            this.materialTextBox2.MaxLength = 19;
-            this.materialTextBox2.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox2.Multiline = false;
-            this.materialTextBox2.Name = "materialTextBox2";
-            this.materialTextBox2.Size = new System.Drawing.Size(255, 50);
-            this.materialTextBox2.TabIndex = 51;
-            this.materialTextBox2.Text = "";
-            this.materialTextBox2.TrailingIcon = null;
-            // 
             // materialLabel6
             // 
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(77, 180);
+            this.materialLabel6.Location = new System.Drawing.Point(55, 180);
             this.materialLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
@@ -359,7 +319,7 @@
             this.materialTextBox3.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox3.Hint = "Phone Number";
             this.materialTextBox3.LeadingIcon = null;
-            this.materialTextBox3.Location = new System.Drawing.Point(454, 30);
+            this.materialTextBox3.Location = new System.Drawing.Point(424, 98);
             this.materialTextBox3.MaxLength = 19;
             this.materialTextBox3.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBox3.Multiline = false;
@@ -368,24 +328,6 @@
             this.materialTextBox3.TabIndex = 52;
             this.materialTextBox3.Text = "";
             this.materialTextBox3.TrailingIcon = null;
-            // 
-            // materialTextBox1
-            // 
-            this.materialTextBox1.AnimateReadOnly = false;
-            this.materialTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialTextBox1.Depth = 0;
-            this.materialTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox1.Hint = "Restaurant Name";
-            this.materialTextBox1.LeadingIcon = null;
-            this.materialTextBox1.Location = new System.Drawing.Point(75, 30);
-            this.materialTextBox1.MaxLength = 19;
-            this.materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox1.Multiline = false;
-            this.materialTextBox1.Name = "materialTextBox1";
-            this.materialTextBox1.Size = new System.Drawing.Size(255, 50);
-            this.materialTextBox1.TabIndex = 50;
-            this.materialTextBox1.Text = "";
-            this.materialTextBox1.TrailingIcon = null;
             // 
             // pictureBox7
             // 
@@ -402,7 +344,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::ProjectBlue.Properties.Resources.round_schedule_black_24dp;
-            this.pictureBox6.Location = new System.Drawing.Point(415, 169);
+            this.pictureBox6.Location = new System.Drawing.Point(385, 169);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(32, 30);
@@ -413,7 +355,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::ProjectBlue.Properties.Resources.round_restaurant_menu_black_24dp;
-            this.pictureBox5.Location = new System.Drawing.Point(415, 107);
+            this.pictureBox5.Location = new System.Drawing.Point(385, 110);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(32, 30);
@@ -424,7 +366,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::ProjectBlue.Properties.Resources.round_restaurant_black_24dp;
-            this.pictureBox4.Location = new System.Drawing.Point(36, 46);
+            this.pictureBox4.Location = new System.Drawing.Point(15, 48);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(32, 30);
@@ -435,7 +377,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::ProjectBlue.Properties.Resources.round_phone_black_24dp;
-            this.pictureBox3.Location = new System.Drawing.Point(415, 46);
+            this.pictureBox3.Location = new System.Drawing.Point(385, 48);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(32, 30);
@@ -446,7 +388,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::ProjectBlue.Properties.Resources.round_place_black_24dp;
-            this.pictureBox2.Location = new System.Drawing.Point(36, 107);
+            this.pictureBox2.Location = new System.Drawing.Point(15, 107);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(32, 30);
@@ -458,7 +400,7 @@
             // 
             this.materialDivider4.BackColor = System.Drawing.Color.Gray;
             this.materialDivider4.Depth = 0;
-            this.materialDivider4.Location = new System.Drawing.Point(377, 30);
+            this.materialDivider4.Location = new System.Drawing.Point(358, 34);
             this.materialDivider4.Margin = new System.Windows.Forms.Padding(4);
             this.materialDivider4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider4.Name = "materialDivider4";
@@ -471,7 +413,7 @@
             this.materialLabel20.AutoSize = true;
             this.materialLabel20.Depth = 0;
             this.materialLabel20.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel20.Location = new System.Drawing.Point(455, 176);
+            this.materialLabel20.Location = new System.Drawing.Point(425, 180);
             this.materialLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel20.Name = "materialLabel20";
@@ -484,7 +426,7 @@
             this.materialLabel21.AutoSize = true;
             this.materialLabel21.Depth = 0;
             this.materialLabel21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel21.Location = new System.Drawing.Point(455, 110);
+            this.materialLabel21.Location = new System.Drawing.Point(425, 110);
             this.materialLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel21.Name = "materialLabel21";
@@ -497,7 +439,7 @@
             this.materialLabel18.AutoSize = true;
             this.materialLabel18.Depth = 0;
             this.materialLabel18.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel18.Location = new System.Drawing.Point(469, 48);
+            this.materialLabel18.Location = new System.Drawing.Point(425, 50);
             this.materialLabel18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel18.Name = "materialLabel18";
@@ -510,8 +452,9 @@
             this.materialLabel17.AutoSize = true;
             this.materialLabel17.Depth = 0;
             this.materialLabel17.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel17.Location = new System.Drawing.Point(76, 110);
+            this.materialLabel17.Location = new System.Drawing.Point(55, 110);
             this.materialLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel17.MaximumSize = new System.Drawing.Size(0, 20);
             this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel17.Name = "materialLabel17";
             this.materialLabel17.Size = new System.Drawing.Size(81, 19);
@@ -524,7 +467,7 @@
             this.materialLabel16.Depth = 0;
             this.materialLabel16.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel16.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.materialLabel16.Location = new System.Drawing.Point(76, 48);
+            this.materialLabel16.Location = new System.Drawing.Point(55, 48);
             this.materialLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel16.Name = "materialLabel16";
@@ -546,6 +489,24 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // txtboxlocation
+            // 
+            this.txtboxlocation.AnimateReadOnly = false;
+            this.txtboxlocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtboxlocation.Depth = 0;
+            this.txtboxlocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtboxlocation.Hint = "Location";
+            this.txtboxlocation.LeadingIcon = null;
+            this.txtboxlocation.Location = new System.Drawing.Point(54, 98);
+            this.txtboxlocation.MaxLength = 60;
+            this.txtboxlocation.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtboxlocation.Multiline = false;
+            this.txtboxlocation.Name = "txtboxlocation";
+            this.txtboxlocation.Size = new System.Drawing.Size(255, 50);
+            this.txtboxlocation.TabIndex = 53;
+            this.txtboxlocation.Text = "";
+            this.txtboxlocation.TrailingIcon = null;
             // 
             // ViewAddedItemsForm
             // 
@@ -613,14 +574,12 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private System.Windows.Forms.Label label1;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox5;
         private MaterialSkin.Controls.MaterialTextBox materialTextBox4;
         private MaterialSkin.Controls.MaterialTextBox materialTextBox3;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox2;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox1;
         private MaterialSkin.Controls.MaterialTextBox materialTextBox6;
         private System.Windows.Forms.PictureBox pictureBox8;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private MaterialSkin.Controls.MaterialTextBox txtboxlocation;
     }
 }
